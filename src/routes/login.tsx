@@ -8,7 +8,7 @@ export const Route = createFileRoute('/login')({
 })
 
 function LoginPage() {
-  const { login, isAuthenticated } = useAuthStore()
+  const { isAuthenticated } = useAuthStore()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -27,16 +27,5 @@ function LoginPage() {
         <LoginForm />
       </div>
     </div>
-    // <div className="flex h-screen items-center justify-center bg-muted/30">
-    //   <div className="bg-white p-8 rounded-xl shadow-lg w-96">
-    //     <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
-    //     <button
-    //       onClick={login}
-    //       className="w-full py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
-    //     >
-    //       Войти (мок)
-    //     </button>
-    //   </div>
-    // </div>
   )
 }
