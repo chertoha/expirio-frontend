@@ -1,18 +1,18 @@
-import type { LoginFormValues } from '@/utils/forms/auth'
-import type { SubmitHandler } from 'react-hook-form'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Eye, EyeOff } from 'lucide-react'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm, type SubmitHandler } from 'react-hook-form'
+import {
+  loginDefaultValues,
+  loginFormSchema,
+  type LoginFormValues,
+} from '@/utils/forms/auth'
 import { useAuthStore } from '@/store/use-auth.store'
-import { loginDefaultValues, loginFormSchema } from '@/utils/forms/auth'
+import { useState } from 'react'
+import { Eye, EyeOff } from 'lucide-react'
 
 const defaultEmail = 'admin@email.com'
 const defaultPassword = '123456'

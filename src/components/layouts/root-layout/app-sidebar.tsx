@@ -6,6 +6,7 @@ import {
   IconChartColumn,
   IconDashboard,
   IconHeartPlus,
+  IconLogout,
   IconMapPin,
   IconPackage,
 } from '@tabler/icons-react'
@@ -16,7 +17,11 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
 } from '@/components/ui/sidebar'
+import { useAuthStore } from '@/store/use-auth.store'
 
 import { NavMain } from './nav-main'
 
@@ -55,6 +60,12 @@ const navMain: NavMain[] = [
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { logout } = useAuthStore()
+
+  const handleLogout = () => {
+    logout()
+  }
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -77,7 +88,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={navMain} />
       </SidebarContent>
 
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              tooltip="Log Out"
+              className="h-10"
+              onClick={handleLogout}
+            >
+              <IconLogout />
+              <span>Log Out</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   )
 }

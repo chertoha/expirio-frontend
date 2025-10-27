@@ -9,16 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AdminBatchesRouteImport } from './routes/admin/batches'
-import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
-import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminNotFoundRouteImport } from './routes/admin/not-found'
-import { Route as AdminNoticeRouteImport } from './routes/admin/notice'
-import { Route as AdminStoragesRouteImport } from './routes/admin/storages'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminStoragesRouteImport } from './routes/admin/storages'
+import { Route as AdminNoticeRouteImport } from './routes/admin/notice'
+import { Route as AdminNotFoundRouteImport } from './routes/admin/not-found'
+import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
+import { Route as AdminBatchesRouteImport } from './routes/admin/batches'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',

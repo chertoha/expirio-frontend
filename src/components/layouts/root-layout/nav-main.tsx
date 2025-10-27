@@ -13,7 +13,6 @@ import { cn } from '@/lib/utils'
 
 export function NavMain({ items }: { items: NavMain[] }) {
   const { location } = useRouterState()
-  console.log(location.pathname)
 
   return (
     <SidebarGroup>
@@ -23,7 +22,7 @@ export function NavMain({ items }: { items: NavMain[] }) {
             const isActive = location.pathname === item.url
 
             return (
-              <SidebarMenuItem key={item.title} className="">
+              <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   asChild
                   tooltip={item.title}
