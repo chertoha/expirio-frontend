@@ -1,7 +1,8 @@
+import { createFileRoute } from '@tanstack/react-router'
+
 import { ChartAreaInteractive } from '@/components/layouts/root-layout/chart-area-interactive'
 import { DataTable } from '@/components/layouts/root-layout/data-table'
 import { SectionCards } from '@/components/layouts/root-layout/section-cards'
-import { createFileRoute } from '@tanstack/react-router'
 import data from '@/utils/mocks/dashboardData.json'
 
 export const Route = createFileRoute('/admin/dashboard')({

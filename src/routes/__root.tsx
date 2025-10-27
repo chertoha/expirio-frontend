@@ -1,10 +1,11 @@
+import type { QueryClient } from '@tanstack/react-query'
+
 import {
-  Outlet,
   createRootRouteWithContext,
+  Outlet,
   redirect,
 } from '@tanstack/react-router'
 
-import type { QueryClient } from '@tanstack/react-query'
 import { useAuthStore } from '@/store/use-auth.store'
 
 interface MyRouterContext {

@@ -1,7 +1,8 @@
-import { LoginForm } from '@/components/login-form'
-import { useAuthStore } from '@/store/use-auth.store'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
+
+import { LoginForm } from '@/components/login-form'
+import { useAuthStore } from '@/store/use-auth.store'
 
 export const Route = createFileRoute('/login')({
   component: LoginPage,

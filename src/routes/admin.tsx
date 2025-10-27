@@ -1,16 +1,16 @@
 import {
-  Outlet,
   createFileRoute,
+  Outlet,
   redirect,
   useRouter,
   useRouterState,
 } from '@tanstack/react-router'
-import { useAuthStore } from '@/store/use-auth.store'
 import { useEffect } from 'react'
 
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layouts/root-layout/app-sidebar'
 import { SiteHeader } from '@/components/layouts/root-layout/site-header'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { useAuthStore } from '@/store/use-auth.store'
 
 export const Route = createFileRoute('/admin')({
   beforeLoad: () => {
@@ -48,7 +48,7 @@ function AdminLayout() {
           <SiteHeader />
         </div>
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto px-10 py-10">
           <Outlet />
         </div>
       </SidebarInset>

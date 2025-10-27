@@ -1,4 +1,13 @@
-import * as React from 'react'
+import type { ChartConfig } from '@/components/ui/chart'
+import type { DragEndEvent, UniqueIdentifier } from '@dnd-kit/core'
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  Row,
+  SortingState,
+  VisibilityState,
+} from '@tanstack/react-table'
+
 import {
   closestCenter,
   DndContext,
@@ -7,8 +16,6 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
-  type DragEndEvent,
-  type UniqueIdentifier,
 } from '@dnd-kit/core'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import {
@@ -32,14 +39,6 @@ import {
   IconPlus,
   IconTrendingUp,
 } from '@tabler/icons-react'
-
-import type {
-  ColumnDef,
-  ColumnFiltersState,
-  Row,
-  SortingState,
-  VisibilityState,
-} from '@tanstack/react-table'
 import {
   flexRender,
   getCoreRowModel,
@@ -50,11 +49,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import * as React from 'react'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { useIsMobile } from '@/hooks/use-mobile'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -62,7 +61,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import type { ChartConfig } from '@/components/ui/chart'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Drawer,
@@ -101,6 +99,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 export const schema = z.object({
   id: z.number(),

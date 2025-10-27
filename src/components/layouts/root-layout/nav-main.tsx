@@ -1,3 +1,7 @@
+import type { NavMain } from './app-sidebar'
+
+import { Link, useRouterState } from '@tanstack/react-router'
+
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -5,8 +9,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import type { NavMain } from './app-sidebar'
-import { Link, useRouterState } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 
 export function NavMain({ items }: { items: NavMain[] }) {

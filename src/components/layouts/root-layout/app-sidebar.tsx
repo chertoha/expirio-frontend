@@ -1,13 +1,15 @@
-import * as React from 'react'
+import type { Icon } from '@tabler/icons-react'
+import type { LinkProps } from '@tanstack/react-router'
+
 import {
-  IconDashboard,
-  IconPackage,
-  IconMapPin,
-  IconChartColumn,
   IconBellPlus,
+  IconChartColumn,
+  IconDashboard,
   IconHeartPlus,
-  type Icon,
+  IconMapPin,
+  IconPackage,
 } from '@tabler/icons-react'
+import * as React from 'react'
 
 import {
   Sidebar,
@@ -15,8 +17,8 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from '@/components/ui/sidebar'
+
 import { NavMain } from './nav-main'
-import type { LinkProps } from '@tanstack/react-router'
 
 export type NavMain = {
   title: string
