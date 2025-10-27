@@ -1,185 +1,81 @@
-'use client'
-
 import * as React from 'react'
 import {
-  IconCamera,
-  IconChartBar,
   IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
+  IconPackage,
+  IconMapPin,
+  IconChartColumn,
+  IconBellPlus,
+  IconHeartPlus,
+  type Icon,
 } from '@tabler/icons-react'
 
-// import { NavDocuments } from '@/components/nav-documents'
-// import { NavMain } from '@/components/nav-main'
-// import { NavSecondary } from '@/components/nav-secondary'
-// import { NavUser } from '@/components/nav-user'
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import { NavMain } from './nav-main'
-import { NavDocuments } from './nav-documents'
-import { NavSecondary } from './nav-secondary'
-import { NavUser } from './nav-user'
+import type { LinkProps } from '@tanstack/react-router'
 
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  navMain: [
-    {
-      title: 'Dashboard',
-      url: '#',
-      icon: IconDashboard,
-    },
-    {
-      title: 'Lifecycle',
-      url: '#',
-      icon: IconListDetails,
-    },
-    {
-      title: 'Analytics',
-      url: '#',
-      icon: IconChartBar,
-    },
-    {
-      title: 'Projects',
-      url: '#',
-      icon: IconFolder,
-    },
-    {
-      title: 'Team',
-      url: '#',
-      icon: IconUsers,
-    },
-  ],
-  navClouds: [
-    {
-      title: 'Capture',
-      icon: IconCamera,
-      isActive: true,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Proposal',
-      icon: IconFileDescription,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Prompts',
-      icon: IconFileAi,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: 'Settings',
-      url: '#',
-      icon: IconSettings,
-    },
-    {
-      title: 'Get Help',
-      url: '#',
-      icon: IconHelp,
-    },
-    {
-      title: 'Search',
-      url: '#',
-      icon: IconSearch,
-    },
-  ],
-  documents: [
-    {
-      name: 'Data Library',
-      url: '#',
-      icon: IconDatabase,
-    },
-    {
-      name: 'Reports',
-      url: '#',
-      icon: IconReport,
-    },
-    {
-      name: 'Word Assistant',
-      url: '#',
-      icon: IconFileWord,
-    },
-  ],
+export type NavMain = {
+  title: string
+  url: LinkProps['to']
+  icon: Icon
 }
+
+const navMain: NavMain[] = [
+  {
+    title: 'Dashboard',
+    url: '/admin/dashboard',
+    icon: IconDashboard,
+  },
+  {
+    title: 'Batches',
+    url: '/admin/batches',
+    icon: IconPackage,
+  },
+  {
+    title: 'Storages',
+    url: '/admin/storages',
+    icon: IconMapPin,
+  },
+  {
+    title: 'Categories',
+    url: '/admin/categories',
+    icon: IconChartColumn,
+  },
+  {
+    title: 'Notice',
+    url: '/admin/notice',
+    icon: IconBellPlus,
+  },
+]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <div className="flex items-start gap-x-3">
+          <div className="shrink-0 flex items-center justify-center p-2 rounded-sm bg-accent shadow-[inset_6px_3px_19px_0px_#00000040] text-white">
+            <IconHeartPlus size={24} className="" />
+          </div>
+          <div className="">
+            <p className="text-xl leading-6 font-semibold text-slate-900">
+              xPirio
+            </p>
+            <p className="text-sm leading-4 tracking-tighter text-slate-500">
+              Medication Control Panel
+            </p>
+          </div>
+        </div>
       </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+
+      <SidebarContent className="text-slate-500 mt-6">
+        <NavMain items={navMain} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
+
+      <SidebarFooter></SidebarFooter>
     </Sidebar>
   )
 }
