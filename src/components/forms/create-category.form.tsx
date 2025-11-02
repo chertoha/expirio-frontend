@@ -29,7 +29,7 @@ export default function CreateCategoryForm({ close }: CreateCategoryFormProps) {
     resolver: zodResolver(categorySchema),
   })
 
-  const onSubmit: SubmitHandler<CreateCategoryFormValues> = async (values) => {
+  const onSubmit: SubmitHandler<CreateCategoryFormValues> = (values) => {
     console.log('Create form sumbit, values: ', values)
     close()
   }

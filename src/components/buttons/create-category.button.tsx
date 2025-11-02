@@ -5,9 +5,7 @@ import CreateCategoryForm from '../forms/create-category.form'
 import Drawer from '../layouts/drawer'
 import { Button } from '../ui/button'
 
-type CreateCategoryButtonProps = {}
-
-export default function CreateCategoryButton({}: CreateCategoryButtonProps) {
+export default function CreateCategoryButton() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
 

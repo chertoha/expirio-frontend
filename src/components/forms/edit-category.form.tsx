@@ -38,7 +38,7 @@ export default function EditCategoryForm({
     resolver: zodResolver(categorySchema),
   })
 
-  const onSubmit: SubmitHandler<EditCategoryFormValues> = async (values) => {
+  const onSubmit: SubmitHandler<EditCategoryFormValues> = (values) => {
     console.log('Edit form sumbit, values: ', values)
     close()
   }
