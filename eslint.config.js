@@ -13,7 +13,8 @@ export default [
       'import/order': 'off',
       'sort-imports': 'off',
       '@typescript-eslint/consistent-type-imports': 'off',
-
+      '@typescript-eslint/no-unnecessary-condition': 'off',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
