@@ -10,20 +10,15 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { useLogin } from '@/hooks/api/use-login'
 import { cn } from '@/lib/utils'
-import { useAuthStore } from '@/store/use-auth.store'
 import { loginDefaultValues, loginFormSchema } from '@/utils/forms/auth'
-
-const defaultEmail = 'admin@email.com'
-const defaultPassword = '123456'
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'div'>) {
-  const { login } = useAuthStore()
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
+  const { mutateAsync: login, isPending } = useLogin()
   const [showPassword, setShowPassword] = useState(false)
 
   const methods = useForm({
@@ -31,17 +26,8 @@ export function LoginForm({
     defaultValues: loginDefaultValues,
   })
 
-  const onSubmit: SubmitHandler<LoginFormValues> = ({ email, password }) => {
-    setError(null)
-    setLoading(true)
-    setTimeout(() => {
-      if (email === defaultEmail && password === defaultPassword) {
-        login()
-      } else {
-        setError('Wrong e-mail or password')
-      }
-      setLoading(false)
-    }, 800)
+  const onSubmit: SubmitHandler<LoginFormValues> = async (creds) => {
+    await login(creds)
   }
 
   return (
@@ -56,7 +42,6 @@ export function LoginForm({
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
-                  defaultValue={defaultEmail}
                   id="email"
                   type="email"
                   placeholder="m@example.com"
@@ -73,7 +58,6 @@ export function LoginForm({
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
-                    defaultValue={defaultPassword}
                     {...methods.register('password')}
                     className="pr-10"
                   />
@@ -91,11 +75,9 @@ export function LoginForm({
                 </div>
               </Field>
 
-              {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
-
               <Field>
                 <Button type="submit">
-                  {loading ? 'Loading...' : 'Login'}
+                  {isPending ? 'Loading...' : 'Login'}
                 </Button>
               </Field>
             </FieldGroup>

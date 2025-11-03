@@ -8,6 +8,7 @@ import { routeTree } from './routeTree.gen'
 
 import './styles.css'
 
+import { AppNotifier } from './components/ui-kit/app-notiffier.tsx'
 import reportWebVitals from './reportWebVitals.ts'
 
 // Create a new router instance
@@ -39,6 +40,7 @@ if (rootElement && !rootElement.innerHTML) {
     <StrictMode>
       <TanStackQueryProvider.Provider {...TanStackQueryProviderContext}>
         <RouterProvider router={router} />
+        <AppNotifier />
       </TanStackQueryProvider.Provider>
     </StrictMode>,
   )
