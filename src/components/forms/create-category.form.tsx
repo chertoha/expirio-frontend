@@ -4,6 +4,8 @@ import type { SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
+import { useCreateCategory } from '@/hooks/api/use-create-category'
+import { notify } from '@/lib/notify'
 import {
   categorySchema,
   createCategoryDefaultValues,
@@ -20,6 +22,8 @@ type CreateCategoryFormProps = {
 }
 
 export default function CreateCategoryForm({ close }: CreateCategoryFormProps) {
+  const { mutateAsync: createCategory } = useCreateCategory()
+
   const {
     register,
     handleSubmit,
@@ -29,8 +33,12 @@ export default function CreateCategoryForm({ close }: CreateCategoryFormProps) {
     resolver: zodResolver(categorySchema),
   })
 
-  const onSubmit: SubmitHandler<CreateCategoryFormValues> = (values) => {
-    console.log('Create form sumbit, values: ', values)
+  const onSubmit: SubmitHandler<CreateCategoryFormValues> = async (values) => {
+    try {
+      await createCategory(values)
+    } catch {
+      notify.error('Something went wrong')
+    }
     close()
   }
 

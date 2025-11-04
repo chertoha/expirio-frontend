@@ -29,7 +29,7 @@ export function NavMain({ items }: { items: NavMain[] }) {
                   className={cn(
                     'text-base h-10',
                     isActive
-                      ? 'bg-accent hover:bg-accent text-slate-700 hover:text-slate-700 font-medium'
+                      ? 'bg-accent hover:bg-accent text-white hover:text-white font-medium'
                       : '',
                   )}
                 >
