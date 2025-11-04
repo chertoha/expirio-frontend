@@ -1,3 +1,5 @@
+import type { Category } from '@/types/entities'
+
 import { SquarePenIcon } from 'lucide-react'
 import { useState } from 'react'
 
@@ -6,10 +8,12 @@ import Drawer from '../layouts/drawer'
 import { Button } from '../ui/button'
 
 type EditCategoryButtonProps = {
-  id: number
+  category: Category
 }
 
-export default function EditCategoryButton({ id }: EditCategoryButtonProps) {
+export default function EditCategoryButton({
+  category,
+}: EditCategoryButtonProps) {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
 
@@ -30,7 +34,7 @@ export default function EditCategoryButton({ id }: EditCategoryButtonProps) {
         title="Update category"
         description="Update the details for the category."
       >
-        <EditCategoryForm categoryId={id} close={close} />
+        <EditCategoryForm category={category} close={close} />
       </Drawer>
     </>
   )

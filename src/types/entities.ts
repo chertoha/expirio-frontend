@@ -1,7 +1,7 @@
 export type Category = {
   id: number
   name: string
-  description: string
+  description: string | null
 }
 
 export type User = {

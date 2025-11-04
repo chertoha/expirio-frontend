@@ -22,10 +22,5 @@ export function useLogin() {
     onSuccess: ({ user, access_token }) => {
       login(user, access_token)
     },
-
-    onError: (error: any) => {
-      console.error('Login failed:', error)
-      throw error
-    },
   })
 }

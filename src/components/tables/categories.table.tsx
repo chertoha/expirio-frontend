@@ -2,18 +2,40 @@ import type { Category } from '@/types/entities'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 
-import { mockCategories } from '@/utils/mocks/categories'
+import { useDeleteCategory } from '@/hooks/api/use-delete-category'
+import { notify } from '@/lib/notify'
+import { useCategoriesStore } from '@/store/use-categories.store'
 
 import EditCategoryButton from '../buttons/edit-category.button'
 import DeleteIconButton from '../ui-kit/delete-icon.button'
+import TableHeaderSortButton from '../ui-kit/table-header-sort.button'
 import { Checkbox } from '../ui/checkbox'
 import TableBase from './base.table'
 
-export default function CategoriesTable() {
-  //   const [data, setData] = useState<Category[]>(mockCategories)
-  const [loading] = useState(false)
+type CategoriesTableProps = {
+  categories: Category[]
+  isLoading?: boolean
+}
+
+export default function CategoriesTable({
+  categories,
+  isLoading = false,
+}: CategoriesTableProps) {
+  const { sort, setSort } = useCategoriesStore()
+  const { mutateAsync: deleteCategory } = useDeleteCategory()
+
+  const handleDelete = useCallback(
+    async (id: number) => {
+      try {
+        await deleteCategory(id)
+      } catch {
+        notify.error('Something went wrong')
+      }
+    },
+    [deleteCategory],
+  )
 
   const columns = useMemo<ColumnDef<Category>[]>(
     () => [
@@ -42,12 +64,23 @@ export default function CategoriesTable() {
       },
       {
         accessorKey: 'name',
-        header: 'Name',
+        header: () => (
+          <div className="max-w-[300px]">
+            <TableHeaderSortButton
+              label="Name"
+              sortField="name"
+              currentSort={sort}
+              setSort={setSort}
+            />
+          </div>
+        ),
         cell: ({ row }) => (
-          <div className="flex items-center gap-2">
+          <div className="inline-flex items-center gap-2">
             <span className="font-medium">{row.original.name}</span>
           </div>
         ),
+
+        size: 200,
       },
       {
         accessorKey: 'description',
@@ -58,15 +91,13 @@ export default function CategoriesTable() {
       },
       {
         id: 'actions',
-        header: 'Actions',
+        header: () => <div className="text-right pr-4">Actions</div>,
         cell: ({ row }) => (
-          <div className="flex gap-2">
-            <EditCategoryButton id={row.original.id} />
+          <div className="flex justify-end gap-2">
+            <EditCategoryButton category={row.original} />
 
             <DeleteIconButton
-              onDelete={() =>
-                console.log('delete category id: ', row.original.id)
-              }
+              onDelete={() => handleDelete(row.original.id)}
               popupTitle="Are you sure you want to delete category"
               popupDescription="This action cannot be undone and will permanently delete category from data base"
             />
@@ -74,15 +105,15 @@ export default function CategoriesTable() {
         ),
       },
     ],
-    [],
+    [handleDelete, setSort, sort],
   )
 
   const table = useReactTable({
-    data: mockCategories,
+    data: categories,
     columns,
     getCoreRowModel: getCoreRowModel(),
     enableRowSelection: true,
   })
 
-  return <TableBase table={table} loading={loading} columns={columns} />
+  return <TableBase table={table} loading={isLoading} columns={columns} />
 }

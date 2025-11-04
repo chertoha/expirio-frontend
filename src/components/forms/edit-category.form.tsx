@@ -1,11 +1,13 @@
+import type { Category } from '@/types/entities'
 import type { EditCategoryFormValues } from '@/utils/forms/category'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
+import { useUpdateCategory } from '@/hooks/api/use-update-category'
+import { notify } from '@/lib/notify'
 import { categorySchema } from '@/utils/forms/category'
-import { mockCategories } from '@/utils/mocks/categories'
 
 import InputErrorMessage from '../ui-kit/input-error-message'
 import { Button } from '../ui/button'
@@ -14,18 +16,15 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 
 type EditCategoryFormProps = {
-  categoryId: number
+  category: Category
   close: () => void
 }
 
 export default function EditCategoryForm({
-  categoryId,
+  category,
   close,
 }: EditCategoryFormProps) {
-  const category = mockCategories.find(({ id }) => categoryId === id)
-
-  if (!category) return null
-
+  const { mutateAsync: updateCategory } = useUpdateCategory()
   const {
     register,
     handleSubmit,
@@ -33,13 +32,17 @@ export default function EditCategoryForm({
   } = useForm<EditCategoryFormValues>({
     defaultValues: {
       name: category.name,
-      description: category.description,
+      description: category.description || '',
     },
     resolver: zodResolver(categorySchema),
   })
 
-  const onSubmit: SubmitHandler<EditCategoryFormValues> = (values) => {
-    console.log('Edit form sumbit, values: ', values)
+  const onSubmit: SubmitHandler<EditCategoryFormValues> = async (values) => {
+    try {
+      await updateCategory({ id: category.id, data: values })
+    } catch {
+      notify.error('Something went wrong')
+    }
     close()
   }
 
