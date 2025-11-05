@@ -1,0 +1,3 @@
+export const CATEGORIES = {
+  CATEGORIES_DEFAULT_LIMIT: 10,
+}
