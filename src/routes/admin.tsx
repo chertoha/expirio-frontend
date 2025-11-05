@@ -48,7 +48,7 @@ function AdminLayout() {
           <SiteHeader />
         </div>
 
-        <div className="flex-1 overflow-y-auto px-10 py-10">
+        <div className="flex-1 flex  flex-col overflow-y-auto px-10 py-10">
           <Outlet />
         </div>
       </SidebarInset>

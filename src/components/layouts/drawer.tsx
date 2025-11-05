@@ -24,14 +24,12 @@ export default function Drawer({
 }: DrawerProps) {
   return (
     <Sheet open={open} onOpenChange={close}>
-      {/* <SheetTrigger>Open</SheetTrigger> */}
-      <SheetContent className="min-w-[600px]">
-        <SheetHeader>
+      <SheetContent className="min-w-[600px] p-6">
+        <SheetHeader className="px-0 pt-0">
           <SheetTitle className="text-2xl leading-8">{title}</SheetTitle>
           <SheetDescription>{description}</SheetDescription>
-
-          <div className="pt-4">{children}</div>
         </SheetHeader>
+        <div className="pt-2">{children}</div>
       </SheetContent>
     </Sheet>
   )
