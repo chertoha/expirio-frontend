@@ -1,6 +1,9 @@
-import { MapPin, Pencil, Thermometer } from 'lucide-react'
+import type { Storage } from '@/types/entities'
 
-import { Button } from '@/components/ui/button'
+import { MapPin, Thermometer } from 'lucide-react'
+
+import EditStorageButton from '@/components/buttons/edit-storage.button'
+import DeleteIconButton from '@/components/ui-kit/delete-icon.button'
 import {
   Card,
   CardContent,
@@ -9,23 +12,16 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-export type Storage = {
-  id: string
-  name: string
-  description: string
-  temperatureLabel: string
-}
-
-type Props = {
+export default function StorageCard({
+  storage,
+  onDelete,
+}: {
   storage: Storage
-  onEdit?: (id: string) => void
-  onDelete?: (id: string) => void
-}
-
-export default function StorageCard({ storage, onEdit, onDelete }: Props) {
+  onDelete?: (id: number) => void
+}) {
   return (
-    <Card className="shadow-sm hover:shadow-md transition">
-      <CardHeader className="flex items-start justify-between">
+    <Card className="rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+      <CardHeader className="flex items-start justify-between pb-2">
         <div className="flex items-center gap-2">
           <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-100 text-sky-700">
             <MapPin size={16} />
@@ -34,15 +30,14 @@ export default function StorageCard({ storage, onEdit, onDelete }: Props) {
             {storage.name}
           </CardTitle>
         </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            onClick={() => onEdit?.(storage.id)}
-          >
-            <Pencil className="size-4" />
-          </Button>
-          {/* <DeleteButton onConfirm={() => onDelete?.(storage.id)} /> */}
+
+        <div className="flex items-center gap-1">
+          <EditStorageButton storage={storage} />
+          <DeleteIconButton
+            onDelete={() => onDelete?.(storage.id)}
+            popupTitle="Delete storage"
+            popupDescription={`Are you sure you want to delete "${storage.name}"? This action cannot be undone.`}
+          />
         </div>
       </CardHeader>
 

@@ -1,72 +1,52 @@
-import type { Storage } from '@/components/storage/storage-card'
-
-// import PageHeader from "@/components/ui/page-header";
-
 import { createFileRoute } from '@tanstack/react-router'
-import { Plus } from 'lucide-react'
-import * as React from 'react'
 
+import CreateStorageButton from '@/components/buttons/create-storage.button'
 import StorageCard from '@/components/storage/storage-card'
-import { Button } from '@/components/ui/button'
+import { useDeleteStorage } from '@/hooks/api/use-delete-storage'
+import { useListStorages } from '@/hooks/api/use-list-storages'
+import { notify } from '@/lib/notify'
+import { mockStorages } from '@/utils/mocks/storages'
 
 export const Route = createFileRoute('/admin/storages')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const [storages, setStorages] = React.useState<Storage[]>([
-    {
-      id: '1',
-      name: 'Refrigerator Unit 1',
-      description: 'Main pharmaceutical refrigerator',
-      temperatureLabel: '2–8°C',
-    },
-    {
-      id: '2',
-      name: 'Cabinet A - Room 101',
-      description: 'General medicine storage cabinet',
-      temperatureLabel: 'Room temperature',
-    },
-    {
-      id: '3',
-      name: 'Controlled Substances Safe',
-      description: 'Main pharmaceutical refrigerator',
-      temperatureLabel: '2–8°C',
-    },
-    {
-      id: '4',
-      name: 'Emergency Kit Storage',
-      description: 'Main pharmaceutical refrigerator',
-      temperatureLabel: '2–8°C',
-    },
-  ])
+  const { data: storagesData } = useListStorages()
+  const storages =
+    storagesData && storagesData.length > 0 ? storagesData : mockStorages
 
-  const handleCreate = () => alert('Open form to add new storage')
-  const handleEdit = (id: string) => alert(`Edit storage ${id}`)
+  const del = useDeleteStorage()
+
+  const handleDelete = async (id: number) => {
+    try {
+      await del.mutateAsync(id)
+      notify.success('Storage deleted successfully')
+    } catch {
+      notify.error('Error deleting storage')
+    }
+  }
 
   return (
-    <div className="p-6">
-      <div className="mb-6 flex items-start justify-between gap-4">
-        {/* <PageHeader
-          title="Storage Locations"
-          text="Manage your medicine storage areas"
-        /> */}
+    <>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-slate-900 text-3xl font-extrabold leading-8">
+            Storage Locations
+          </h1>
+          <p className="mt-2 text-base leading-7 text-slate-500">
+            Manage your medicine storage areas
+          </p>
+        </div>
 
-        <Button onClick={handleCreate} variant="default" size="default">
-          <Plus size={18} />
-          Add location
-        </Button>
+        <CreateStorageButton />
       </div>
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+      <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {storages.map((s) => (
-          <StorageCard
-            key={s.id}
-            storage={s}
-            onEdit={handleEdit}
-            // onDelete={handleDelete}
-          />
+          <StorageCard key={s.id} storage={s} onDelete={handleDelete} />
         ))}
       </div>
-    </div>
+    </>
   )
 }
