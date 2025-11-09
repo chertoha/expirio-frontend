@@ -1,3 +1,7 @@
 export const CATEGORIES = {
   CATEGORIES_DEFAULT_LIMIT: 10,
 }
+
+export const PRODUCTS = {
+  PRODUCTS_DEFAULT_LIMIT: 12,
+}

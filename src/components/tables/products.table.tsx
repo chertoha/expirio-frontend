@@ -1,43 +1,44 @@
-import type { Category } from '@/types/entities'
+import type { Product } from '@/types/entities'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useCallback, useMemo } from 'react'
 
-import { useDeleteCategory } from '@/hooks/api/categories/use-delete-category'
-import { notify } from '@/lib/notify'
-import { useCategoriesStore } from '@/store/use-categories.store'
+import { notifyAxiosError } from '@/helpers/notify-axios-error'
+import { useDeleteProduct } from '@/hooks/api/products/use-delete-product'
+import { useProductsStore } from '@/store/use-products.store'
 
-import EditCategoryButton from '../buttons/edit-category.button'
+import EditProductButton from '../buttons/edit-product.button'
 import DeleteIconButton from '../ui-kit/delete-icon.button'
 import TableHeaderSortButton from '../ui-kit/table-header-sort.button'
+import { Badge } from '../ui/badge'
 import { Checkbox } from '../ui/checkbox'
 import TableBase from './base.table'
 
-type CategoriesTableProps = {
-  categories: Category[]
+type CProductsTableProps = {
+  products: Product[]
   isLoading?: boolean
 }
 
-export default function CategoriesTable({
-  categories,
+export default function ProductsTable({
+  products,
   isLoading = false,
-}: CategoriesTableProps) {
-  const { sort, setSort } = useCategoriesStore()
-  const { mutateAsync: deleteCategory } = useDeleteCategory()
+}: CProductsTableProps) {
+  const { sort, setSort } = useProductsStore()
+  const { mutateAsync: deleteProduct } = useDeleteProduct()
 
   const handleDelete = useCallback(
     async (id: number) => {
       try {
-        await deleteCategory(id)
-      } catch {
-        notify.error('Something went wrong')
+        await deleteProduct(id)
+      } catch (error) {
+        notifyAxiosError(error)
       }
     },
-    [deleteCategory],
+    [deleteProduct],
   )
 
-  const columns = useMemo<ColumnDef<Category>[]>(
+  const columns = useMemo<ColumnDef<Product>[]>(
     () => [
       {
         id: 'select',
@@ -76,25 +77,47 @@ export default function CategoriesTable({
         ),
         cell: ({ row }) => (
           <div className="inline-flex items-center gap-2">
-            <span className="font-medium">{row.original.name}</span>
+            <span className="font-medium flex items-center gap-x-3">
+              {row.original.name}
+              {/* {row.original.} */}
+              <Badge variant="secondary">
+                {row.original.dosage} {row.original.dosageUnit.name}
+              </Badge>
+            </span>
           </div>
         ),
 
-        size: 200,
+        // size: 200,
       },
+
       {
-        accessorKey: 'description',
-        header: 'Description',
+        accessorKey: 'activeIngredient.name',
+        header: 'Active ingredient',
         cell: ({ row }) => (
-          <p className="text-gray-600">{row.original.description}</p>
+          <Badge variant="default">{row.original.activeIngredient.name}</Badge>
         ),
       },
+
+      {
+        id: 'categories',
+        header: 'Categories',
+        cell: ({ row }) => (
+          <div className="inline-flex items-center gap-2 flex-wrap">
+            {row.original.categories.map(({ category }) => (
+              <Badge key={category.id} variant="outline">
+                {category.name}
+              </Badge>
+            ))}
+          </div>
+        ),
+      },
+
       {
         id: 'actions',
         header: () => <div className="text-right pr-4">Actions</div>,
         cell: ({ row }) => (
           <div className="flex justify-end gap-2">
-            <EditCategoryButton category={row.original} />
+            <EditProductButton product={row.original} />
 
             <DeleteIconButton
               onDelete={() => handleDelete(row.original.id)}
@@ -109,7 +132,7 @@ export default function CategoriesTable({
   )
 
   const table = useReactTable({
-    data: categories,
+    data: products,
     columns,
     getCoreRowModel: getCoreRowModel(),
     enableRowSelection: true,

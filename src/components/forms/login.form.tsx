@@ -1,4 +1,4 @@
-import type { LoginFormValues } from '@/utils/forms/auth'
+import type { LoginFormValues } from '@/schemas/auth.schema'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -10,9 +10,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { useLogin } from '@/hooks/api/use-login'
+import { useLogin } from '@/hooks/api/auth/use-login'
 import { cn } from '@/lib/utils'
-import { loginDefaultValues, loginFormSchema } from '@/utils/forms/auth'
+import { loginDefaultValues, loginFormSchema } from '@/schemas/auth.schema'
 
 export function LoginForm({
   className,
