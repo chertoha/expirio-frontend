@@ -1,3 +1,4 @@
+import type { Product } from '@/types/entities'
 import type { PaginationQuery, SearchQuery, SortQuery } from '@/types/responses'
 
 import { create } from 'zustand'
@@ -16,6 +17,9 @@ interface ProductsState extends PaginationQuery, SortQuery, SearchQuery {
   setIngredient: (activeIngredientId: number | null) => void
   setCategory: (categoryId: number | null) => void
 
+  selectedProducts: Product[]
+  setSelected: (selectedProducts: Product[]) => void
+
   reset: () => void
 }
 
@@ -28,18 +32,22 @@ export const useProductsStore = create<ProductsState>()(
       page: 1,
       limit: PRODUCTS_DEFAULT_LIMIT,
       sort: 'id:asc',
+      selectedProducts: [],
 
       activeIngredientId: null,
       categoryId: null,
 
-      setSearch: (search) => set({ search, page: 1 }),
-      setPage: (page) => set({ page }),
-      setLimit: (limit) => set({ limit }),
-      setSort: (sort) => set({ sort }),
+      setSearch: (search) => set({ search, page: 1, selectedProducts: [] }),
+      setPage: (page) => set({ page, selectedProducts: [] }),
+      setLimit: (limit) => set({ limit, selectedProducts: [] }),
+      setSort: (sort) => set({ sort, selectedProducts: [] }),
 
       setIngredient: (activeIngredientId) =>
-        set({ activeIngredientId, page: 1 }),
-      setCategory: (categoryId) => set({ categoryId, page: 1 }),
+        set({ activeIngredientId, page: 1, selectedProducts: [] }),
+      setCategory: (categoryId) =>
+        set({ categoryId, page: 1, selectedProducts: [] }),
+
+      setSelected: (selectedProducts) => set({ selectedProducts }),
 
       reset: () =>
         set({

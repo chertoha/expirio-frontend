@@ -9,6 +9,7 @@ import { useActiveIngredientsStore } from '@/store/use-active-ingredients.store'
 import { useCategoryListStore } from '@/store/use-category-list.store'
 import { useProductsStore } from '@/store/use-products.store'
 
+import AssignCategoryButton from '../buttons/assign-category.button'
 import CreateProductButton from '../buttons/create-product.button'
 import SearchSelect from '../ui-kit/search-select'
 
@@ -67,6 +68,8 @@ export default function ProductsToolbar({
         />
 
         <CreateProductButton />
+
+        <AssignCategoryButton />
       </div>
     </div>
   )

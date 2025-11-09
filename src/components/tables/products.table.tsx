@@ -2,7 +2,7 @@ import type { Product } from '@/types/entities'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { notifyAxiosError } from '@/helpers/notify-axios-error'
 import { useDeleteProduct } from '@/hooks/api/products/use-delete-product'
@@ -24,8 +24,10 @@ export default function ProductsTable({
   products,
   isLoading = false,
 }: CProductsTableProps) {
-  const { sort, setSort } = useProductsStore()
+  const { sort, setSort, setSelected } = useProductsStore()
   const { mutateAsync: deleteProduct } = useDeleteProduct()
+
+  const [rowSelection, setRowSelection] = useState({})
 
   const handleDelete = useCallback(
     async (id: number) => {
@@ -48,9 +50,10 @@ export default function ProductsTable({
               table.getIsAllPageRowsSelected() ||
               (table.getIsSomePageRowsSelected() && 'indeterminate')
             }
-            onCheckedChange={(value) =>
+            onCheckedChange={(value) => {
               table.toggleAllPageRowsSelected(!!value)
-            }
+              // handleSelectProducts()
+            }}
             aria-label="Select all"
           />
         ),
@@ -86,8 +89,6 @@ export default function ProductsTable({
             </span>
           </div>
         ),
-
-        // size: 200,
       },
 
       {
@@ -135,8 +136,20 @@ export default function ProductsTable({
     data: products,
     columns,
     getCoreRowModel: getCoreRowModel(),
+
     enableRowSelection: true,
+    state: { rowSelection },
+    onRowSelectionChange: setRowSelection,
   })
 
-  return <TableBase table={table} loading={isLoading} columns={columns} />
+  useEffect(() => {
+    const selected = table.getSelectedRowModel().rows.map((r) => r.original)
+    setSelected(selected)
+  }, [rowSelection, setSelected, table])
+
+  return (
+    <>
+      <TableBase table={table} loading={isLoading} columns={columns} />
+    </>
+  )
 }

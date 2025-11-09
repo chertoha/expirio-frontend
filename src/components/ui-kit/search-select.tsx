@@ -82,7 +82,7 @@ export default function SearchSelect<T extends Record<string, any>>(
     )
 
     return (
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} onOpenChange={setOpen} modal>
         <PopoverTrigger id={labelledId} asChild>
           <Button
             variant="outline"
@@ -97,8 +97,6 @@ export default function SearchSelect<T extends Record<string, any>>(
             )}
           >
             {selectedOption ? selectedOption.label : placeholder}
-            {/* <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-             */}
 
             <div className="flex items-center gap-1">
               {selectedOption && (
@@ -112,6 +110,7 @@ export default function SearchSelect<T extends Record<string, any>>(
                   <XIcon />
                 </span>
               )}
+
               <ChevronsUpDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
             </div>
           </Button>
