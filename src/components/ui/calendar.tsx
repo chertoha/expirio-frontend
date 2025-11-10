@@ -1,27 +1,19 @@
-'use client';
+// components/ui/calendar.tsx
+'use client'
 
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
-// import { ChevronLeft, ChevronRight } from 'lucide-react';
-import * as React from 'react';
-import { DayPicker } from 'react-day-picker';
+import * as React from 'react'
+import { DayPicker } from 'react-day-picker'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
-import 'react-day-picker/dist/style.css';
-
-
+import 'react-day-picker/dist/style.css'
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
-function Calendar({
-  className,
-  classNames,
-  showOutsideDays = true,
-  ...props
-}: CalendarProps) {
+export function Calendar({ className, classNames, ...props }: CalendarProps) {
   return (
     <DayPicker
-      showOutsideDays={showOutsideDays}
+      showOutsideDays
       className={cn('p-3', className)}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
@@ -31,8 +23,6 @@ function Calendar({
         nav: 'space-x-1 flex items-center',
         nav_button:
           'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 inline-flex items-center justify-center rounded-md hover:bg-accent text-accent-foreground',
-        nav_button_previous: 'absolute left-1',
-        nav_button_next: 'absolute right-1',
         table: 'w-full border-collapse space-y-1',
         head_row: 'flex',
         head_cell:
@@ -50,15 +40,9 @@ function Calendar({
         day_disabled: 'text-muted-foreground opacity-50',
         ...classNames,
       }}
-      components={{
-        IconLeft: () => <IconChevronLeft className="h-4 w-4" />,
-        IconRight: () => <IconChevronRight className="h-4 w-4" />,
-      }}
       {...props}
     />
   )
 }
 
 Calendar.displayName = 'Calendar'
-
-export { Calendar }
