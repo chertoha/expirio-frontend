@@ -5,16 +5,13 @@ import StorageCard from '@/components/storage/storage-card'
 import { useDeleteStorage } from '@/hooks/api/use-delete-storage'
 import { useListStorages } from '@/hooks/api/use-list-storages'
 import { notify } from '@/lib/notify'
-import { mockStorages } from '@/utils/mocks/storages'
 
 export const Route = createFileRoute('/admin/storages')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { data: storagesData } = useListStorages()
-  const storages =
-    storagesData && storagesData.length > 0 ? storagesData : mockStorages
+  const { data: storagesData = [], isLoading } = useListStorages()
 
   const del = useDeleteStorage()
 
@@ -26,7 +23,12 @@ function RouteComponent() {
       notify.error('Error deleting storage')
     }
   }
-
+  if (isLoading) {
+    return <div className="h-24 text-center">Loading storages...</div>
+  }
+  if (!storagesData || storagesData.length === 0) {
+    return <div className="h-24 text-center">No storage locations found</div>
+  }
   return (
     <>
       <div className="flex items-start justify-between">
@@ -43,7 +45,7 @@ function RouteComponent() {
       </div>
 
       <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {storages.map((s) => (
+        {storagesData.map((s) => (
           <StorageCard key={s.id} storage={s} onDelete={handleDelete} />
         ))}
       </div>
