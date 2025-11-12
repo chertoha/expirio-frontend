@@ -1,33 +1,36 @@
-import type { Batch } from '@/types/entities';
-import type { CreateBatchFormValues } from '@/utils/forms/batch';
-import type { SubmitHandler } from 'react-hook-form';
+import type { CreateBatchFormValues } from '@/schemas/batch'
+import type { Batch } from '@/types/entities'
+import type { SubmitHandler } from 'react-hook-form'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
+import { Controller, useForm } from 'react-hook-form'
 
+import { Calendar } from '@/components/ui/calendar'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { useCreateBatch } from '@/hooks/api/use-create-batch'
+import { useFindProducts } from '@/hooks/api/use-find-products'
+import { useFindStorage } from '@/hooks/api/use-find-storage'
+import { notify } from '@/lib/notify'
+import { cn } from '@/lib/utils'
+import { batchSchema, createBatchDefaultValues } from '@/schemas/batch'
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
-import { Controller, useForm } from 'react-hook-form';
-
-
-
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCreateBatch } from '@/hooks/api/use-create-batch';
-import { useFindProducts } from '@/hooks/api/use-find-products';
-import { useFindStorage } from '@/hooks/api/use-find-storage';
-import { notify } from '@/lib/notify';
-import { cn } from '@/lib/utils';
-import { batchSchema, createBatchDefaultValues } from '@/utils/forms/batch';
-
-
-
-import InputErrorMessage from '../ui-kit/input-error-message';
-import { Button } from '../ui/button';
-import { Field, FieldGroup, FieldLabel } from '../ui/field';
-import { Input } from '../ui/input';
-import { Textarea } from '../ui/textarea';
-
+import InputErrorMessage from '../ui-kit/input-error-message'
+import { Button } from '../ui/button'
+import { Field, FieldGroup, FieldLabel } from '../ui/field'
+import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
 
 type Props = {
   batch: Batch
@@ -74,7 +77,7 @@ export default function EditBatchForm({ batch, close }: Props) {
       notify.error('Something went wrong')
     }
   }
-console.log('edit', batch)
+  console.log('edit', batch)
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <FieldGroup>

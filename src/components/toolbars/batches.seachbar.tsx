@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useFindCategories } from '@/hooks/api/use-find-categories'
+import { useFindCategories } from '@/hooks/api/categories/use-find-categories'
 import { useFindStorage } from '@/hooks/api/use-find-storage'
 
 export default function BatchesSearchbar() {

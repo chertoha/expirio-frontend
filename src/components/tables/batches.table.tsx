@@ -1,25 +1,24 @@
-import type { Batch } from '@/types/entities';
-import type { ColumnDef } from '@tanstack/react-table';
+import type { Batch } from '@/types/entities'
+import type { ColumnDef } from '@tanstack/react-table'
 
+import {
+  IconCalendarMonth,
+  IconChartDots2,
+  IconDots,
+  IconMapPin,
+  IconPackage,
+} from '@tabler/icons-react'
+import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { useMemo } from 'react'
 
-
-import { IconCalendarMonth, IconChartDots2, IconDots, IconMapPin, IconPackage } from '@tabler/icons-react';
-import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { useMemo } from 'react';
-
-
-
-import { useDeleteBatch } from '@/hooks/api/use-delete-batch';
-import { useFindStorage } from '@/hooks/api/use-find-storage';
-
-
+import { useDeleteBatch } from '@/hooks/api/use-delete-batch'
+import { useFindStorage } from '@/hooks/api/use-find-storage'
 
 // import { notify } from '@/lib/notify'
 
-import EditBatchButton from '../buttons/edit-batch.button';
-import DeleteIconButton from '../ui-kit/delete-icon.button';
-import TableBaseBatches from './base.table.batches';
-
+import EditBatchButton from '../buttons/edit-batch.button'
+import DeleteIconButton from '../ui-kit/delete-icon.button'
+import TableBaseBatches from './base.table.batches'
 
 type BatchesTableProps = {
   batches: Batch[]
@@ -32,7 +31,6 @@ export default function BatchesTable({
   // const { sort, setSort } = useBatchesStore()
   const { mutateAsync: deleteBatch } = useDeleteBatch()
   const { data: storages = [] } = useFindStorage()
-
 
   const columns = useMemo<ColumnDef<Batch>[]>(
     () => [
@@ -88,7 +86,9 @@ export default function BatchesTable({
         header: 'Categories',
         cell: ({ row }) => {
           const categories = row.original.product?.categories || []
-          const categoryNames = categories.map((c) => c.name).join(', ')
+          const categoryNames = categories
+            .map((c) => c.category.name)
+            .join(', ')
           return (
             <div className="flex items-center gap-2 text-[#64748B]">
               <IconChartDots2 />

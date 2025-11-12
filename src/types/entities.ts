@@ -6,22 +6,23 @@ export type Category = {
   products: Array<{ categoryId: number; productId: number }>
 }
 
-export type Storage = {
-  id: number
-  name: string
-  description: string | null
-  temperature: number
-}
+// export type Storage = {
+//   id: number
+//   name: string
+//   description: string | null
+//   temperature: number
+// }
 
-export type Product = {
-  id: number
-  name: string
-  barcode: string
-  dosage: number
-  dosageUnitId: number
-  activeIngredientId: number
-  categories: Category[]
-}
+// export type Product = {
+//   id: number
+//   name: string
+//   barcode: string
+//   dosage: number
+//   dosageUnitId: number
+//   activeIngredientId: number
+//   categories: Category[]
+// }
+
 export type StoragesBatch = {
   storageId: number
   batchId: number
