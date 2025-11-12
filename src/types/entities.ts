@@ -57,3 +57,16 @@ export type Product = {
 
   activeIngredient: ActiveIngredient
 }
+export type Storage = {
+  id: number
+  name: string
+  description: string | null
+  temperatureLabel: string
+}
+
+export type AlertRule = {
+  id: string | number
+  name: string
+  daysLeft: number
+  enabled: boolean
+}
