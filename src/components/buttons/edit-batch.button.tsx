@@ -1,14 +1,15 @@
-import type { Batch } from '@/types/entities'
+import type { Batch } from '@/types/entities';
 
-import { SquarePenIcon } from 'lucide-react'
-import { useState } from 'react'
+import { SquarePenIcon } from 'lucide-react';
+import { useState } from 'react';
 
-import CreateBatchForm from '../forms/create-batch.form'
-import Drawer from '../layouts/drawer'
-import { Button } from '../ui/button'
+import Drawer from '../layouts/drawer';
+import { Button } from '../ui/button';
+import EditBatchForm from '../forms/edit-batch.form';
+
 
 type EditBatchButtonProps = {
-  batch: Batch[]
+  batch: Batch
 }
 
 export default function EditBatchButton({ batch }: EditBatchButtonProps) {
@@ -29,17 +30,10 @@ export default function EditBatchButton({ batch }: EditBatchButtonProps) {
       <Drawer
         open={open}
         close={close}
-        title="Update category"
-        description="Update the details for the category."
+        title="Update batch"
+        description="Update the details for the batch."
       >
-        {/* <CreateBatchForm
-          batch={editingBatch || undefined}
-          onSubmit={handleSubmit}
-          close={() => {
-            setOpen(false)
-            setEditingBatch(null)
-          }}
-        /> */}
+        <EditBatchForm batch={batch} close={close} />
       </Drawer>
     </>
   )

@@ -5,14 +5,16 @@ import type { ColumnDef } from '@tanstack/react-table';
 
 import { IconCalendarMonth, IconChartDots2, IconDots, IconMapPin, IconPackage } from '@tabler/icons-react';
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
 
 
 import { useDeleteBatch } from '@/hooks/api/use-delete-batch';
-import { notify } from '@/lib/notify';
+import { useFindStorage } from '@/hooks/api/use-find-storage';
 
 
+
+// import { notify } from '@/lib/notify'
 
 import EditBatchButton from '../buttons/edit-batch.button';
 import DeleteIconButton from '../ui-kit/delete-icon.button';
@@ -21,44 +23,19 @@ import TableBaseBatches from './base.table.batches';
 
 type BatchesTableProps = {
   batches: Batch[]
-  onEdit: (batch: Batch) => void
   isLoading?: boolean
 }
 export default function BatchesTable({
   batches,
-  onEdit,
-  //   isLoading = false,
+  isLoading = false,
 }: BatchesTableProps) {
   // const { sort, setSort } = useBatchesStore()
   const { mutateAsync: deleteBatch } = useDeleteBatch()
-
+  const { data: storages = [] } = useFindStorage()
 
 
   const columns = useMemo<ColumnDef<Batch>[]>(
     () => [
-      //   {
-      //     id: 'select',
-      //     header: ({ table }) => (
-      //       <Checkbox
-      //         checked={
-      //           table.getIsAllPageRowsSelected() ||
-      //           (table.getIsSomePageRowsSelected() && 'indeterminate')
-      //         }
-      //         onCheckedChange={(value) =>
-      //           table.toggleAllPageRowsSelected(!!value)
-      //         }
-      //         aria-label="Select all"
-      //       />
-      //     ),
-      //     cell: ({ row }) => (
-      //       <Checkbox
-      //         checked={row.getIsSelected()}
-      //         onCheckedChange={(value) => row.toggleSelected(!!value)}
-      //         aria-label="Select row"
-      //       />
-      //     ),
-      //     size: 40,
-      //   },
       {
         accessorKey: 'batchNumber',
         header: () => (
@@ -94,7 +71,7 @@ export default function BatchesTable({
         header: 'quantity',
         cell: ({ row }) => {
           const quantitys = row.original.storages || []
-          const quantity = quantitys.map((s) => s.temperature).join(', ')
+          const quantity = quantitys.map((s) => s.qty).join(', ')
           return (
             <div className="w-[106px] flex items-center gap-2 justify-between text-[#64748B]">
               <IconPackage />
@@ -124,8 +101,15 @@ export default function BatchesTable({
         accessorKey: 'storages',
         header: 'Storages',
         cell: ({ row }) => {
-          const storages = row.original.storages || []
-          const storageNames = storages.map((s) => s.name).join(', ')
+          const storagesBatch = row.original.storages || []
+          const storageNames = storagesBatch
+            .map((sb) => {
+              const storage = storages.find((s) => s.id === sb.storageId)
+              return storage?.name
+            })
+            .filter(Boolean) // відкидає undefined
+            .join(', ')
+
           return (
             <div className="flex items-center gap-2 text-[#64748B]">
               <IconMapPin />
@@ -134,6 +118,7 @@ export default function BatchesTable({
           )
         },
       },
+
       {
         accessorKey: 'expirationDate',
         header: 'Expiration Date',
@@ -151,21 +136,48 @@ export default function BatchesTable({
       {
         accessorKey: 'status',
         header: 'Status',
-        cell: ({}) => (
-          <div className="">
-            <button className="w-[114px] border border-[#2DD4BF] px-3 py-1 rounded-md">
-              Active
-            </button>
-          </div>
-        ),
+        cell: ({ row }) => {
+          const { expirationDate } = row.original
+
+          const now = new Date()
+          const expDate = new Date(expirationDate)
+          const diffDays = Math.ceil(
+            (expDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
+          )
+
+          let status = 'Active'
+          let borderColor = '#2DD4BF' // бірюзовий
+          let textColor = '#2DD4BF'
+
+          if (diffDays <= 0) {
+            status = 'Expired'
+            borderColor = '#EF4444' // червоний
+            textColor = '#EF4444'
+          } else if (diffDays <= 30) {
+            status = 'Expiring Soon'
+            borderColor = '#F59E0B' // жовтий
+            textColor = '#F59E0B'
+          }
+
+          return (
+            <div className="flex justify-center">
+              <button
+                className="w-[130px] px-3 py-1 rounded-md border text-sm font-medium"
+                style={{ borderColor, color: textColor }}
+              >
+                {status}
+              </button>
+            </div>
+          )
+        },
       },
+
       {
         id: 'actions',
         header: () => <div className="text-right pr-4">Actions</div>,
         cell: ({ row }) => (
           <div className="flex justify-end gap-2">
-            {/* <EditBatchButton onClick={() => onEdit(row.original)} /> */}
-            {/* <EditBatchButton /> */}
+            <EditBatchButton batch={row.original} />
 
             <DeleteIconButton
               onDelete={() => deleteBatch(row.original.id)}
@@ -176,15 +188,17 @@ export default function BatchesTable({
         ),
       },
     ],
-    [onEdit, deleteBatch],
+    [deleteBatch, storages],
   )
 
   const table = useReactTable({
-    data: batches,
+    data: Array.isArray(batches) ? batches : [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     enableRowSelection: true,
   })
 
-  return <TableBaseBatches table={table} loading={false} columns={columns} />
+  return (
+    <TableBaseBatches table={table} loading={isLoading} columns={columns} />
+  )
 }

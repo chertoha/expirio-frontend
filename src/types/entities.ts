@@ -11,17 +11,20 @@ export type Storage = {
   temperature: number
 }
 
-export type CreateBatchBackendDTO = {
-  batchNumber: string
-  description?: string
-  manufactureDate: string
-  expirationDate: string
-  productId: number
-  quantity: number
-  storageId: number
-  categoryId: number
+export type Product = {
+  id: number
+  name: string
+  barcode: string
+  dosage: number
+  dosageUnitId: number
+  activeIngredientId: number
+  categories: Category[]
 }
-
+export type StoragesBatch = {
+  storageId: number
+  batchId: number
+  qty: number
+}
 export type Batch = {
   id: number
   batchNumber: string
@@ -29,9 +32,17 @@ export type Batch = {
   manufactureDate: string
   expirationDate: string
   productId: number
+  storages: StoragesBatch[]
+  product: Product
 }
 
-
+export type CreateBatchBackendDTO = {
+  batchNumber: string
+  description?: string
+  manufactureDate: string
+  expirationDate: string
+  productId: number
+}
 
 export type User = {
   id: number

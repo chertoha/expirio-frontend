@@ -1,41 +1,40 @@
-import type { CreateBatchFormValues } from '@/utils/forms/batch'
-import type { SubmitHandler } from 'react-hook-form'
+import type { Batch } from '@/types/entities';
+import type { CreateBatchFormValues } from '@/utils/forms/batch';
+import type { SubmitHandler } from 'react-hook-form';
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { format } from 'date-fns'
-import { Controller, useForm } from 'react-hook-form'
 
-import { Calendar } from '@/components/ui/calendar'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { useCreateBatch } from '@/hooks/api/use-create-batch'
-import { useFindProducts } from '@/hooks/api/use-find-products'
-import { useFindStorage } from '@/hooks/api/use-find-storage'
-import { notify } from '@/lib/notify'
-import { cn } from '@/lib/utils'
-import { batchSchema, createBatchDefaultValues } from '@/utils/forms/batch'
 
-import InputErrorMessage from '../ui-kit/input-error-message'
-import { Button } from '../ui/button'
-import { Field, FieldGroup, FieldLabel } from '../ui/field'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
+import { Controller, useForm } from 'react-hook-form';
+
+
+
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useCreateBatch } from '@/hooks/api/use-create-batch';
+import { useFindProducts } from '@/hooks/api/use-find-products';
+import { useFindStorage } from '@/hooks/api/use-find-storage';
+import { notify } from '@/lib/notify';
+import { cn } from '@/lib/utils';
+import { batchSchema, createBatchDefaultValues } from '@/utils/forms/batch';
+
+
+
+import InputErrorMessage from '../ui-kit/input-error-message';
+import { Button } from '../ui/button';
+import { Field, FieldGroup, FieldLabel } from '../ui/field';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+
 
 type Props = {
+  batch: Batch
   close: () => void
 }
 
-export default function CreateBatchForm({ close }: Props) {
+export default function EditBatchForm({ batch, close }: Props) {
   const { mutateAsync: createBatch } = useCreateBatch()
   const { data: storages = [] } = useFindStorage()
   const { data: productsResponse } = useFindProducts()
@@ -75,7 +74,7 @@ export default function CreateBatchForm({ close }: Props) {
       notify.error('Something went wrong')
     }
   }
-
+console.log('edit', batch)
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <FieldGroup>
