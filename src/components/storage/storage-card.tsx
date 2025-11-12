@@ -45,7 +45,7 @@ export default function StorageCard({
         <CardDescription>{storage.description}</CardDescription>
         <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
           <Thermometer size={16} />
-          <span>{storage.temperatureLabel}</span>
+          <span>{storage.temperature} °C</span>
         </div>
       </CardContent>
     </Card>

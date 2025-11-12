@@ -1,0 +1,47 @@
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
+
+import { useListStorages } from '@/hooks/api/storages/use-list-storages'
+
+import { Card, CardContent } from '../ui/card'
+
+const storageData = [
+  { name: 'Berlin', qty: 120 },
+  { name: 'Hamburg', qty: 95 },
+  { name: 'Munich', qty: 75 },
+  { name: 'Cologne', qty: 60 },
+  { name: 'Stuttgart', qty: 45 },
+]
+
+export default function StorageBarChart() {
+  const { data: storages = [] } = useListStorages()
+
+  //   console.log(data)
+
+  const chartData = storages.map((storage) => ({
+    name: storage.name,
+    qty: storage.batches.reduce((sum, batch) => sum + batch.qty, 0),
+  }))
+
+  return (
+    <Card className="rounded-2xl shadow-sm">
+      <CardContent className="p-4">
+        <h2 className="mb-4 text-lg font-medium">Stock Volume by Storages</h2>
+        <ResponsiveContainer width="100%" height={280}>
+          <BarChart data={chartData}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="qty" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
+  )
+}

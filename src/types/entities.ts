@@ -2,6 +2,8 @@ export type Category = {
   id: number
   name: string
   description: string | null
+
+  products: Array<{ categoryId: number; productId: number }>
 }
 
 export type User = {
@@ -61,7 +63,9 @@ export type Storage = {
   id: number
   name: string
   description: string | null
-  temperatureLabel: string
+  temperature: string
+
+  batches: Array<{ storageId: number; batchId: number; qty: number }>
 }
 
 export type AlertRule = {

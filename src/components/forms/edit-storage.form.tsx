@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { useUpdateStorage } from '@/hooks/api/use-update-storage'
+import { useUpdateStorage } from '@/hooks/api/storages/use-update-storage'
 import { notify } from '@/lib/notify'
 import { storageSchema } from '@/schemas/storage'
 

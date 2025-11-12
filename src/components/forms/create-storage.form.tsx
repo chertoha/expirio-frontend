@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { useCreateStorage } from '@/hooks/api/use-create-storage'
+import { useCreateStorage } from '@/hooks/api/storages/use-create-storage'
 import { notify } from '@/lib/notify'
 import { storageSchema } from '@/schemas/storage'
 
