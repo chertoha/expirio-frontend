@@ -9,6 +9,7 @@ import { useDeleteProduct } from '@/hooks/api/products/use-delete-product'
 import { useProductsStore } from '@/store/use-products.store'
 
 import EditProductButton from '../buttons/edit-product.button'
+import { CategoryBadge } from '../product/category-badge'
 import DeleteIconButton from '../ui-kit/delete-icon.button'
 import TableHeaderSortButton from '../ui-kit/table-header-sort.button'
 import { Badge } from '../ui/badge'
@@ -105,9 +106,15 @@ export default function ProductsTable({
         cell: ({ row }) => (
           <div className="inline-flex items-center gap-2 flex-wrap">
             {row.original.categories.map(({ category }) => (
-              <Badge key={category.id} variant="outline">
-                {category.name}
-              </Badge>
+              <CategoryBadge
+                key={category.id}
+                label={category.name}
+                categoryId={category.id}
+                productId={row.original.id}
+              />
+              // <Badge key={category.id} variant="outline">
+              //   {category.name}
+              // </Badge>
             ))}
           </div>
         ),
