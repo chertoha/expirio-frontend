@@ -42,9 +42,9 @@ export default function ProductsToolbar({
         </InputGroup>
       </div>
 
-      <div className="flex items-center gap-x-4">
+      <div className="flex items-center gap-x-4 ">
         <SearchSelect
-          className="w-[290px]"
+          className="w-[200px]"
           value={categoryId}
           onChange={(value) => setCategory(Number(value))}
           options={categoryList.map(({ id, name }) => ({
@@ -56,7 +56,7 @@ export default function ProductsToolbar({
         />
 
         <SearchSelect
-          className="w-[290px]"
+          className="w-[200px]"
           value={activeIngredientId}
           onChange={(value) => setIngredient(Number(value))}
           options={ingredients.map(({ id, name }) => ({
