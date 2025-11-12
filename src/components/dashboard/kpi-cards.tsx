@@ -1,15 +1,17 @@
 import { useFindProducts } from '@/hooks/api/products/use-find-products'
+import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 
 import { Card, CardContent } from '../ui/card'
 
 export default function KpiCards() {
   const { data: products } = useFindProducts()
+  const { data: storages } = useListStorages()
 
   const kpiData = [
     { title: 'Products', value: products?.totalElements || 0 },
-    { title: 'Batches', value: 342 },
-    { title: 'Expired', value: 14 },
-    { title: 'Storages', value: 5 },
+    { title: 'Batches', value: 0 },
+    { title: 'Expired', value: 0 },
+    { title: 'Storages', value: storages?.length || 0 },
   ]
 
   return (
