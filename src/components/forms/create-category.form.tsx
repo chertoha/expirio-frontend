@@ -1,15 +1,15 @@
-import type { CreateCategoryFormValues } from '@/utils/forms/category'
+import type { CreateCategoryFormValues } from '@/schemas/category.schema'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import { useCreateCategory } from '@/hooks/api/use-create-category'
+import { useCreateCategory } from '@/hooks/api/categories/use-create-category'
 import { notify } from '@/lib/notify'
 import {
   categorySchema,
   createCategoryDefaultValues,
-} from '@/utils/forms/category'
+} from '@/schemas/category.schema'
 
 import InputErrorMessage from '../ui-kit/input-error-message'
 import { Button } from '../ui/button'

@@ -2,7 +2,7 @@ import { Trash2Icon } from 'lucide-react'
 import { useState } from 'react'
 
 import { Button } from '../ui/button'
-import ConfirmPopup from './confitm-popup'
+import ConfirmPopup from './confirm-popup'
 
 type DeleteIconButtonProps = {
   onDelete: () => void

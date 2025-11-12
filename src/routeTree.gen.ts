@@ -14,6 +14,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminStoragesRouteImport } from './routes/admin/storages'
+import { Route as AdminProductsRouteImport } from './routes/admin/products'
 import { Route as AdminNoticeRouteImport } from './routes/admin/notice'
 import { Route as AdminNotFoundRouteImport } from './routes/admin/not-found'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
@@ -43,6 +44,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const AdminStoragesRoute = AdminStoragesRouteImport.update({
   id: '/storages',
   path: '/storages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsRoute = AdminProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminNoticeRoute = AdminNoticeRouteImport.update({
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/not-found': typeof AdminNotFoundRoute
   '/admin/notice': typeof AdminNoticeRoute
+  '/admin/products': typeof AdminProductsRoute
   '/admin/storages': typeof AdminStoragesRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/not-found': typeof AdminNotFoundRoute
   '/admin/notice': typeof AdminNoticeRoute
+  '/admin/products': typeof AdminProductsRoute
   '/admin/storages': typeof AdminStoragesRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/not-found': typeof AdminNotFoundRoute
   '/admin/notice': typeof AdminNoticeRoute
+  '/admin/products': typeof AdminProductsRoute
   '/admin/storages': typeof AdminStoragesRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/not-found'
     | '/admin/notice'
+    | '/admin/products'
     | '/admin/storages'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/not-found'
     | '/admin/notice'
+    | '/admin/products'
     | '/admin/storages'
     | '/admin'
   id:
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/admin/dashboard'
     | '/admin/not-found'
     | '/admin/notice'
+    | '/admin/products'
     | '/admin/storages'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -188,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminStoragesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/products': {
+      id: '/admin/products'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/notice': {
       id: '/admin/notice'
       path: '/notice'
@@ -232,6 +251,7 @@ interface AdminRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminNotFoundRoute: typeof AdminNotFoundRoute
   AdminNoticeRoute: typeof AdminNoticeRoute
+  AdminProductsRoute: typeof AdminProductsRoute
   AdminStoragesRoute: typeof AdminStoragesRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -242,6 +262,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
   AdminNotFoundRoute: AdminNotFoundRoute,
   AdminNoticeRoute: AdminNoticeRoute,
+  AdminProductsRoute: AdminProductsRoute,
   AdminStoragesRoute: AdminStoragesRoute,
   AdminIndexRoute: AdminIndexRoute,
 }

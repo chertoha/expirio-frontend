@@ -10,6 +10,9 @@ import { useEffect } from 'react'
 import { AppSidebar } from '@/components/layouts/root-layout/app-sidebar'
 import { SiteHeader } from '@/components/layouts/root-layout/site-header'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { useGetCategoryList } from '@/hooks/api/categories/use-get-category-list'
+import { useGetActiveIngredients } from '@/hooks/api/products/use-get-active-ingredients'
+import { useGetDosageUnits } from '@/hooks/api/products/use-get-dosage-unit'
 import { useAuthStore } from '@/store/use-auth.store'
 
 export const Route = createFileRoute('/admin')({
@@ -23,6 +26,10 @@ export const Route = createFileRoute('/admin')({
 })
 
 function AdminLayout() {
+  useGetDosageUnits()
+  useGetCategoryList()
+  useGetActiveIngredients()
+
   const { isAuthenticated } = useAuthStore()
   const { location } = useRouterState()
   const router = useRouter()

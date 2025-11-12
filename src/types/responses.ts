@@ -1,4 +1,10 @@
-import type { Batch, Category, User } from './entities'
+import type {
+  Batch,
+  Category,
+  DosageUnit,
+  Product,
+  User,
+} from './entities'
 
 export type Pageable<T> = {
   data: T[]
@@ -15,6 +21,11 @@ export type AuthResponse = {
 export type CategoriesResponse = Pageable<Category>
 
 export type BatchesResponse = Pageable<Batch>
+
+export type ProductsResponse = Pageable<Product>
+
+export type DosageUnitsResponse = Pageable<DosageUnit>
+
 export interface PaginationQuery {
   page?: number
   limit?: number

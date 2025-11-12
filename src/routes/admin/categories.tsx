@@ -4,7 +4,7 @@ import { useShallow } from 'zustand/react/shallow'
 import CategoriesTable from '@/components/tables/categories.table'
 import CategoriesToolbar from '@/components/toolbars/categories.toolbar'
 import PaginationBar from '@/components/ui-kit/pagination-bar'
-import { useFindCategories } from '@/hooks/api/use-find-categories'
+import { useFindCategories } from '@/hooks/api/categories/use-find-categories'
 import { useCategoriesStore } from '@/store/use-categories.store'
 
 export const Route = createFileRoute('/admin/categories')({
