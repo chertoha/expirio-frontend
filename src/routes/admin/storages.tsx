@@ -2,8 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import CreateStorageButton from '@/components/buttons/create-storage.button'
 import StorageCard from '@/components/storage/storage-card'
-import { useDeleteStorage } from '@/hooks/api/use-delete-storage'
-import { useListStorages } from '@/hooks/api/use-list-storages'
+import { useDeleteStorage } from '@/hooks/api/storages/use-delete-storage'
+import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 import { notify } from '@/lib/notify'
 
 export const Route = createFileRoute('/admin/storages')({

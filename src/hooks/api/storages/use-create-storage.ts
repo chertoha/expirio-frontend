@@ -4,24 +4,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { api } from '@/lib/api'
 
-export type UpdateStorageData = {
+export type CreateStorageData = {
   name: string
   description?: string | null
-  temperatureLabel: string
+  temperature: string
 }
 
-export function useUpdateStorage() {
+export function useCreateStorage() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async ({
-      id,
-      data,
-    }: {
-      id: number
-      data: UpdateStorageData
-    }): Promise<Storage> => {
-      const response = await api.put(`/storages/${id}`, data)
+    mutationFn: async (data: CreateStorageData): Promise<Storage> => {
+      const response = await api.post('/storages', data)
       return response.data
     },
 

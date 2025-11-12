@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { useUpdateStorage } from '@/hooks/api/use-update-storage'
+import { useUpdateStorage } from '@/hooks/api/storages/use-update-storage'
 import { notify } from '@/lib/notify'
 import { storageSchema } from '@/schemas/storage'
 
@@ -31,7 +31,7 @@ export default function EditStorageForm({
     defaultValues: {
       name: storage.name,
       description: storage.description ?? '',
-      temperatureLabel: storage.temperatureLabel,
+      temperature: storage.temperature,
     },
     resolver: zodResolver(storageSchema),
   })
@@ -65,8 +65,8 @@ export default function EditStorageForm({
         </Field>
         <Field>
           <FieldLabel htmlFor="edit_storage_temp">Temperature Label</FieldLabel>
-          <Input id="edit_storage_temp" {...register('temperatureLabel')} />
-          <InputErrorMessage text={errors.temperatureLabel?.message} />
+          <Input id="edit_storage_temp" {...register('temperature')} />
+          <InputErrorMessage text={errors.temperature?.message} />
         </Field>
         <Field>
           <div className="flex justify-end gap-3">
