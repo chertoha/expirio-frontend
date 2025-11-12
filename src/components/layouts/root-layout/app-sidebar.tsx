@@ -9,7 +9,9 @@ import {
   IconLogout,
   IconMapPin,
   IconPackage,
+  IconPill,
 } from '@tabler/icons-react'
+// import { TabletIcon } from 'lucide-react'
 import * as React from 'react'
 
 import {
@@ -46,6 +48,11 @@ const navMain: NavMain[] = [
     title: 'Storages',
     url: '/admin/storages',
     icon: IconMapPin,
+  },
+  {
+    title: 'Products',
+    url: '/admin/products',
+    icon: IconPill,
   },
   {
     title: 'Categories',

@@ -1,13 +1,13 @@
+import type { EditCategoryFormValues } from '@/schemas/category.schema'
 import type { Category } from '@/types/entities'
-import type { EditCategoryFormValues } from '@/utils/forms/category'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import { useUpdateCategory } from '@/hooks/api/use-update-category'
+import { useUpdateCategory } from '@/hooks/api/categories/use-update-category'
 import { notify } from '@/lib/notify'
-import { categorySchema } from '@/utils/forms/category'
+import { categorySchema } from '@/schemas/category.schema'
 
 import InputErrorMessage from '../ui-kit/input-error-message'
 import { Button } from '../ui/button'

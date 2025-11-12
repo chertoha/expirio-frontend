@@ -1,4 +1,4 @@
-import type { CreateStorageFormValues } from '@/utils/forms/storage'
+import type { CreateStorageFormValues } from '@/schemas/storage'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useCreateStorage } from '@/hooks/api/use-create-storage'
 import { notify } from '@/lib/notify'
-import { storageSchema } from '@/utils/forms/storage'
+import { storageSchema } from '@/schemas/storage'
 
 export default function CreateStorageForm({ close }: { close: () => void }) {
   const { mutateAsync: createStorage } = useCreateStorage()

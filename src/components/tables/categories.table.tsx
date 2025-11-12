@@ -4,7 +4,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useCallback, useMemo } from 'react'
 
-import { useDeleteCategory } from '@/hooks/api/use-delete-category'
+import { useDeleteCategory } from '@/hooks/api/categories/use-delete-category'
 import { notify } from '@/lib/notify'
 import { useCategoriesStore } from '@/store/use-categories.store'
 

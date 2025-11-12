@@ -38,7 +38,7 @@ export const useCategoriesStore = create<CategoriesState>()(
     }),
 
     {
-      name: 'employees-filters-storage',
+      name: 'categories-filters-storage',
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         search: state.search,

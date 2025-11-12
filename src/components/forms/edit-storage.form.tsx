@@ -1,5 +1,5 @@
+import type { EditStorageFormValues } from '@/schemas/storage'
 import type { Storage } from '@/types/entities'
-import type { EditStorageFormValues } from '@/utils/forms/storage'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -11,7 +11,9 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useUpdateStorage } from '@/hooks/api/use-update-storage'
 import { notify } from '@/lib/notify'
-import { storageSchema } from '@/utils/forms/storage'
+import { storageSchema } from '@/schemas/storage'
+
+// import { storageSchema } from '@/utils/forms/storage'
 
 export default function EditStorageForm({
   storage,
