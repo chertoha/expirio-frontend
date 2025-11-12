@@ -5,7 +5,6 @@ import { useAssignCategory } from '@/hooks/api/products/use-assign-category'
 import { useCategoryListStore } from '@/store/use-category-list.store'
 import { useProductsStore } from '@/store/use-products.store'
 
-import CreateCategoryForm from '../forms/create-category.form'
 import Drawer from '../layouts/drawer'
 import SearchSelect from '../ui-kit/search-select'
 import { Button } from '../ui/button'
