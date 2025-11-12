@@ -31,7 +31,7 @@ export default function EditStorageForm({
     defaultValues: {
       name: storage.name,
       description: storage.description ?? '',
-      temperatureLabel: storage.temperatureLabel,
+      temperature: storage.temperature,
     },
     resolver: zodResolver(storageSchema),
   })
@@ -65,8 +65,8 @@ export default function EditStorageForm({
         </Field>
         <Field>
           <FieldLabel htmlFor="edit_storage_temp">Temperature Label</FieldLabel>
-          <Input id="edit_storage_temp" {...register('temperatureLabel')} />
-          <InputErrorMessage text={errors.temperatureLabel?.message} />
+          <Input id="edit_storage_temp" {...register('temperature')} />
+          <InputErrorMessage text={errors.temperature?.message} />
         </Field>
         <Field>
           <div className="flex justify-end gap-3">

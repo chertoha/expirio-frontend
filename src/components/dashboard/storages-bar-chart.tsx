@@ -11,18 +11,8 @@ import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 
 import { Card, CardContent } from '../ui/card'
 
-const storageData = [
-  { name: 'Berlin', qty: 120 },
-  { name: 'Hamburg', qty: 95 },
-  { name: 'Munich', qty: 75 },
-  { name: 'Cologne', qty: 60 },
-  { name: 'Stuttgart', qty: 45 },
-]
-
 export default function StorageBarChart() {
   const { data: storages = [] } = useListStorages()
-
-  //   console.log(data)
 
   const chartData = storages.map((storage) => ({
     name: storage.name,

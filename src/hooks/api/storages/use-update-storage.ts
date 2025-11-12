@@ -7,7 +7,7 @@ import { api } from '@/lib/api'
 export type UpdateStorageData = {
   name: string
   description?: string | null
-  temperatureLabel: string
+  temperature: string
 }
 
 export function useUpdateStorage() {

@@ -19,7 +19,7 @@ export default function CreateStorageForm({ close }: { close: () => void }) {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateStorageFormValues>({
-    defaultValues: { name: '', description: '', temperatureLabel: '' },
+    defaultValues: { name: '', description: '', temperature: '' },
     resolver: zodResolver(storageSchema),
   })
 
@@ -54,8 +54,8 @@ export default function CreateStorageForm({ close }: { close: () => void }) {
           <FieldLabel htmlFor="create_storage_temp">
             Temperature Label
           </FieldLabel>
-          <Input id="create_storage_temp" {...register('temperatureLabel')} />
-          <InputErrorMessage text={errors.temperatureLabel?.message} />
+          <Input id="create_storage_temp" {...register('temperature')} />
+          <InputErrorMessage text={errors.temperature?.message} />
         </Field>
         <Field>
           <div className="flex justify-end gap-3">
