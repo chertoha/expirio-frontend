@@ -21,7 +21,6 @@ type AddAlertFormProps = {
 }
 
 export default function AddAlertForm({ close }: AddAlertFormProps) {
-  //   const { mutateAsync: createCategory } = useCreateCategory()
   const { mutateAsync: addAlert } = useAddAlert()
 
   const {

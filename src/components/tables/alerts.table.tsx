@@ -59,7 +59,6 @@ export default function AlertsTable() {
           <div className="text-center">
             <Switch
               checked={row.original.isEnabled}
-              //   disabled={!alertsEnabled}
               onCheckedChange={() =>
                 handleEnabled(row.original.id, row.original.isEnabled)
               }
