@@ -115,3 +115,19 @@ export type AlertRule = {
   daysLeft: number
   enabled: boolean
 }
+
+export type AlertType = 'EMAIL' | 'SMS' | 'PUSH'
+
+export type AlertChannel = {
+  id: number
+  type: AlertType
+}
+
+export type Alert = {
+  id: number
+  name: string
+  daysBefore: number
+  isEnabled: boolean
+
+  channels: AlertChannel[]
+}

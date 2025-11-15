@@ -47,19 +47,20 @@ function SettingsPage() {
           <h1 className="text-3xl font-bold tracking-tight text-slate-900">
             Settings
           </h1>
-          <p className="text-slate-500">
+          {/* <p className="text-slate-500">
             Control how alerts and notifications behave in your inventory
             system.
-          </p>
+          </p> */}
         </div>
 
-        <Button onClick={generatePdf}>
+        {/* <Button onClick={generatePdf}>
           <FileText className="mr-2 size-4" />
           Generate PDF
-        </Button>
+        </Button> */}
       </div>
 
-      <CardNotificationChannels channels={channels} onChange={setChannels} />
+      {/* <CardNotificationChannels channels={channels} onChange={setChannels} /> */}
+
       <AlertCardRules
         alertsEnabled={alertsEnabled}
         setAlertsEnabled={setAlertsEnabled}

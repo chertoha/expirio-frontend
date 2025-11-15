@@ -112,9 +112,6 @@ export default function ProductsTable({
                 categoryId={category.id}
                 productId={row.original.id}
               />
-              // <Badge key={category.id} variant="outline">
-              //   {category.name}
-              // </Badge>
             ))}
           </div>
         ),

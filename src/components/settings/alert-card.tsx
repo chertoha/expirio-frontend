@@ -1,8 +1,5 @@
-import type { AlertRule } from '@/types/entities'
-
 import { Plus } from 'lucide-react'
 
-import DeleteIconButton from '@/components/ui-kit/delete-icon.button'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -11,46 +8,42 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
 
-type Props = {
-  alertsEnabled: boolean
-  setAlertsEnabled: (v: boolean) => void
-  rules: AlertRule[]
-  toggleRule: (id: AlertRule['id'], value: boolean) => void
-  deleteRule: (id: AlertRule['id']) => void
-  addRule: () => void
-}
+import AddAlertButton from '../buttons/add-alert.button'
+import AlertsTable from '../tables/alerts.table'
 
-export default function AlertCardRules({
-  alertsEnabled,
-  setAlertsEnabled,
-  rules,
-  toggleRule,
-  deleteRule,
-  addRule,
-}: Props) {
+// type Props = {
+//   alertsEnabled: boolean
+//   setAlertsEnabled: (v: boolean) => void
+//   rules: AlertRule[]
+//   toggleRule: (id: AlertRule['id'], value: boolean) => void
+//   deleteRule: (id: AlertRule['id']) => void
+//   addRule: () => void
+// }
+
+export default function AlertCardRules() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-0">
+        {/* <div className="flex justify-between "> */}
         <div>
-          <CardTitle>Expiration alert</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-medium">
+            Expiration alerts
+          </CardTitle>
+          <CardDescription className="mt-1 text-base">
             Create and manage multiple expiration warnings with different
             trigger times
           </CardDescription>
         </div>
 
-        <div className="flex items-center gap-2 mt-1">
+        <AddAlertButton />
+        {/* <Button onClick={() => {}}>
+          <Plus />
+          Add Alert
+        </Button> */}
+        {/* </div> */}
+
+        {/* <div className="flex items-center gap-2 mt-1">
           <Switch
             id="enable-alerts"
             checked={alertsEnabled}
@@ -59,11 +52,14 @@ export default function AlertCardRules({
           <Label htmlFor="enable-alerts" className="text-sm text-slate-600">
             Enable
           </Label>
-        </div>
+        </div> */}
       </CardHeader>
 
       <CardContent>
-        <Table className="bg-white rounded-lg">
+        <AlertsTable />
+
+        {/*  */}
+        {/* <Table className="bg-white rounded-lg">
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
@@ -103,14 +99,7 @@ export default function AlertCardRules({
               ))
             )}
           </TableBody>
-        </Table>
-
-        <div className="mt-6 flex justify-center">
-          <Button onClick={addRule}>
-            <Plus className="mr-2 size-4" />
-            Add new alert
-          </Button>
-        </div>
+        </Table> */}
       </CardContent>
     </Card>
   )
