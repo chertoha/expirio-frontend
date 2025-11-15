@@ -19,9 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useCreateBatch } from '@/hooks/api/use-create-batch'
-import { useFindProducts } from '@/hooks/api/use-find-products'
-import { useFindStorage } from '@/hooks/api/use-find-storage'
+import { useCreateBatch } from '@/hooks/api/batches/use-create-batch'
+import { useFindStorage } from '@/hooks/api/batches/use-find-storage'
+import { useFindProducts } from '@/hooks/api/products/use-find-products'
 import { notify } from '@/lib/notify'
 import { cn } from '@/lib/utils'
 import { batchSchema, createBatchDefaultValues } from '@/schemas/batch'

@@ -11,13 +11,18 @@ type BatchesResponse = {
   limit: number
   totalElements: number
 }
-export function useFindBatches() {
+
+type BatchesQuery = {
+  expired?: boolean
+}
+
+export function useFindBatches({ expired }: BatchesQuery = {}) {
   const { page, limit, search, sort } = useCategoriesStore()
   return useQuery<BatchesResponse>({
-    queryKey: ['batches', { page, limit, search, sort }],
+    queryKey: ['batches', { page, limit, search, sort, expired }],
     queryFn: async () => {
       const response = await api.get<BatchesResponse>('/batches', {
-        params: { page, limit, search, sort },
+        params: { page, limit, search, sort, expired },
       })
       return response.data
     },

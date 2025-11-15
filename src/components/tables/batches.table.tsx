@@ -11,8 +11,8 @@ import {
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useMemo } from 'react'
 
-import { useDeleteBatch } from '@/hooks/api/use-delete-batch'
-import { useFindStorage } from '@/hooks/api/use-find-storage'
+import { useDeleteBatch } from '@/hooks/api/batches/use-delete-batch'
+import { useFindStorage } from '@/hooks/api/batches/use-find-storage'
 
 // import { notify } from '@/lib/notify'
 

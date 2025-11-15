@@ -1,3 +1,4 @@
+import { useFindBatches } from '@/hooks/api/batches/use-find-batches'
 import { useFindProducts } from '@/hooks/api/products/use-find-products'
 import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 
@@ -6,12 +7,16 @@ import { Card, CardContent } from '../ui/card'
 export default function KpiCards() {
   const { data: products } = useFindProducts()
   const { data: storages } = useListStorages()
+  const { data: batches } = useFindBatches()
+  const { data: expiredBatches } = useFindBatches({ expired: true })
+
+  console.log(expiredBatches)
 
   const kpiData = [
-    { title: 'Products', value: products?.totalElements || 0 },
-    { title: 'Batches', value: 0 },
-    { title: 'Expired', value: 0 },
-    { title: 'Storages', value: storages?.length || 0 },
+    { title: 'Products', value: products?.totalElements ?? 0 },
+    { title: 'Batches', value: batches?.totalElements ?? 0 },
+    { title: 'Expired', value: expiredBatches?.totalElements ?? 0 },
+    { title: 'Storages', value: storages?.length ?? 0 },
   ]
 
   return (

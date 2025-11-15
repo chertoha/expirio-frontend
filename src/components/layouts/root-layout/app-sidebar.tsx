@@ -60,8 +60,8 @@ const navMain: NavMain[] = [
     icon: IconChartColumn,
   },
   {
-    title: 'Notice',
-    url: '/admin/notice',
+    title: 'Settings',
+    url: '/admin/settings',
     icon: IconBellPlus,
   },
 ]
