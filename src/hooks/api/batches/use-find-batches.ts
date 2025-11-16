@@ -29,3 +29,25 @@ export function useFindBatches({ expired }: BatchesQuery = {}) {
     placeholderData: (previousData) => previousData,
   })
 }
+
+export function useFindAllExpiredBatches() {
+  return useQuery<Batch[]>({
+    queryKey: ['expired-batches'],
+    queryFn: async () => {
+      const checkResponse = await api.get<BatchesResponse>('/batches', {
+        params: { expired: true },
+      })
+
+      const response = await api.get<BatchesResponse>('/batches', {
+        params: {
+          expired: true,
+          page: 1,
+          limit: checkResponse.data.totalElements,
+        },
+      })
+
+      return response.data.data
+    },
+    placeholderData: (previousData) => previousData,
+  })
+}

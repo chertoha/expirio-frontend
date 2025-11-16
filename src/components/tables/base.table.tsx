@@ -15,9 +15,15 @@ interface ITableBaseProps<T> {
   table: TableType<T>
   loading: boolean
   columns: ColumnDef<T>[]
+  noResultsLabel?: string
 }
 
-const TableBase = <T,>({ table, loading, columns }: ITableBaseProps<T>) => {
+const TableBase = <T,>({
+  table,
+  loading,
+  columns,
+  noResultsLabel = 'No results.',
+}: ITableBaseProps<T>) => {
   return (
     <Table className="bg-white rounded-lg">
       <TableHeader>
@@ -59,7 +65,7 @@ const TableBase = <T,>({ table, loading, columns }: ITableBaseProps<T>) => {
         ) : (
           <TableRow>
             <TableCell colSpan={columns.length} className="h-24 text-center">
-              No results.
+              {noResultsLabel}
             </TableCell>
           </TableRow>
         )}

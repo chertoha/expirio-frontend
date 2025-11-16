@@ -105,7 +105,12 @@ export default function AlertsTable() {
 
   return (
     <>
-      <TableBase table={table} loading={isLoading} columns={columns} />
+      <TableBase
+        table={table}
+        loading={isLoading}
+        columns={columns}
+        noResultsLabel="No alerts."
+      />
     </>
   )
 }

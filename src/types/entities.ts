@@ -27,6 +27,8 @@ export type StoragesBatch = {
   storageId: number
   batchId: number
   qty: number
+
+  storage: Omit<Storage, 'batches'>
 }
 export type Batch = {
   id: number
