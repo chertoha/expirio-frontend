@@ -4,7 +4,7 @@ import CreateBatchButton from '@/components/buttons/create-batch.button'
 import BatchesTable from '@/components/tables/batches.table'
 import BatchesSearchbar from '@/components/toolbars/batches.seachbar'
 import { MainTitle } from '@/components/ui/main-title'
-import { useFindBatches } from '@/hooks/api/use-find-batches'
+import { useFindBatches } from '@/hooks/api/batches/use-find-batches'
 
 export const Route = createFileRoute('/admin/batches')({
   component: RouteComponent,

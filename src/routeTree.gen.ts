@@ -14,8 +14,8 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminStoragesRouteImport } from './routes/admin/storages'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminProductsRouteImport } from './routes/admin/products'
-import { Route as AdminNoticeRouteImport } from './routes/admin/notice'
 import { Route as AdminNotFoundRouteImport } from './routes/admin/not-found'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
@@ -46,14 +46,14 @@ const AdminStoragesRoute = AdminStoragesRouteImport.update({
   path: '/storages',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminProductsRoute = AdminProductsRouteImport.update({
   id: '/products',
   path: '/products',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminNoticeRoute = AdminNoticeRouteImport.update({
-  id: '/notice',
-  path: '/notice',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminNotFoundRoute = AdminNotFoundRouteImport.update({
@@ -85,8 +85,8 @@ export interface FileRoutesByFullPath {
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/not-found': typeof AdminNotFoundRoute
-  '/admin/notice': typeof AdminNoticeRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/storages': typeof AdminStoragesRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -97,8 +97,8 @@ export interface FileRoutesByTo {
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/not-found': typeof AdminNotFoundRoute
-  '/admin/notice': typeof AdminNoticeRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/storages': typeof AdminStoragesRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -111,8 +111,8 @@ export interface FileRoutesById {
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/not-found': typeof AdminNotFoundRoute
-  '/admin/notice': typeof AdminNoticeRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/storages': typeof AdminStoragesRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -126,8 +126,8 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/not-found'
-    | '/admin/notice'
     | '/admin/products'
+    | '/admin/settings'
     | '/admin/storages'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -138,8 +138,8 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/not-found'
-    | '/admin/notice'
     | '/admin/products'
+    | '/admin/settings'
     | '/admin/storages'
     | '/admin'
   id:
@@ -151,8 +151,8 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/not-found'
-    | '/admin/notice'
     | '/admin/products'
+    | '/admin/settings'
     | '/admin/storages'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -200,18 +200,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminStoragesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/products': {
       id: '/admin/products'
       path: '/products'
       fullPath: '/admin/products'
       preLoaderRoute: typeof AdminProductsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/notice': {
-      id: '/admin/notice'
-      path: '/notice'
-      fullPath: '/admin/notice'
-      preLoaderRoute: typeof AdminNoticeRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/not-found': {
@@ -250,8 +250,8 @@ interface AdminRouteChildren {
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminNotFoundRoute: typeof AdminNotFoundRoute
-  AdminNoticeRoute: typeof AdminNoticeRoute
   AdminProductsRoute: typeof AdminProductsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminStoragesRoute: typeof AdminStoragesRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -261,8 +261,8 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminNotFoundRoute: AdminNotFoundRoute,
-  AdminNoticeRoute: AdminNoticeRoute,
   AdminProductsRoute: AdminProductsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminStoragesRoute: AdminStoragesRoute,
   AdminIndexRoute: AdminIndexRoute,
 }

@@ -27,6 +27,8 @@ export type StoragesBatch = {
   storageId: number
   batchId: number
   qty: number
+
+  storage: Omit<Storage, 'batches'>
 }
 export type Batch = {
   id: number
@@ -114,4 +116,20 @@ export type AlertRule = {
   name: string
   daysLeft: number
   enabled: boolean
+}
+
+export type AlertType = 'EMAIL' | 'SMS' | 'PUSH'
+
+export type AlertChannel = {
+  id: number
+  type: AlertType
+}
+
+export type Alert = {
+  id: number
+  name: string
+  daysBefore: number
+  isEnabled: boolean
+
+  channels: AlertChannel[]
 }
