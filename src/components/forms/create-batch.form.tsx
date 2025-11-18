@@ -19,8 +19,9 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useCreateBatch } from '@/hooks/api/batches/use-create-batch'
-import { useFindStorage } from '@/hooks/api/batches/use-find-storage'
+// import { useFindStorage } from '@/hooks/api/batches/use-find-storage'
 import { useFindProducts } from '@/hooks/api/products/use-find-products'
+import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 import { notify } from '@/lib/notify'
 import { cn } from '@/lib/utils'
 import { batchSchema, createBatchDefaultValues } from '@/schemas/batch'
@@ -37,7 +38,9 @@ type Props = {
 
 export default function CreateBatchForm({ close }: Props) {
   const { mutateAsync: createBatch } = useCreateBatch()
-  const { data: storages = [] } = useFindStorage()
+  // const { data: storages = [] } = useFindStorage()
+  const { data: storages = [] } = useListStorages()
+
   const { data: productsResponse } = useFindProducts()
 
   const products = Array.isArray(productsResponse?.data)

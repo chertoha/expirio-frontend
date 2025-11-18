@@ -8,12 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useFindStorage } from '@/hooks/api/batches/use-find-storage'
+// import { useFindStorage } from '@/hooks/api/batches/use-find-storage'
 import { useFindCategories } from '@/hooks/api/categories/use-find-categories'
+import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 
-export default function BatchesSearchbar() {
+export default function BatchesToolbar() {
   const { data: categoriesResponse } = useFindCategories()
-  const { data: storages = [] } = useFindStorage()
+  // const { data: storages = [] } = useFindStorage()
+  const { data: storages = [] } = useListStorages()
   return (
     <div className="mb-9 flex items-flex-start justify-between">
       <div className="relative w-[180px]">

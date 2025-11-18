@@ -3,7 +3,7 @@ import type { Batch } from '@/types/entities'
 import { useQuery } from '@tanstack/react-query'
 
 import { api } from '@/lib/api'
-import { useCategoriesStore } from '@/store/use-categories.store'
+import { useBatchesStore } from '@/store/use-batches.store'
 
 type BatchesResponse = {
   data: Batch[]
@@ -17,7 +17,8 @@ type BatchesQuery = {
 }
 
 export function useFindBatches({ expired }: BatchesQuery = {}) {
-  const { page, limit, search, sort } = useCategoriesStore()
+  const { page, limit, search, sort } = useBatchesStore()
+
   return useQuery<BatchesResponse>({
     queryKey: ['batches', { page, limit, search, sort, expired }],
     queryFn: async () => {

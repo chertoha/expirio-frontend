@@ -3,7 +3,7 @@ import type { PaginationQuery, SearchQuery, SortQuery } from '@/types/responses'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
-import { CATEGORIES } from '@/helpers/constants'
+import { BATCHES } from '@/helpers/constants'
 
 interface BatchesState extends PaginationQuery, SortQuery, SearchQuery {
   setSearch: (search: string) => void
@@ -12,14 +12,14 @@ interface BatchesState extends PaginationQuery, SortQuery, SearchQuery {
   setSort: (sort: string) => void
   reset: () => void
 }
-const { CATEGORIES_DEFAULT_LIMIT } = CATEGORIES
+const { BATCHES_DEFAULT_LIMIT } = BATCHES
 
 export const useBatchesStore = create<BatchesState>()(
   persist(
     (set) => ({
       search: '',
       page: 1,
-      limit: CATEGORIES_DEFAULT_LIMIT,
+      limit: BATCHES_DEFAULT_LIMIT,
       sort: 'id:asc',
 
       setSearch: (search) => set({ search, page: 1 }),
@@ -31,7 +31,7 @@ export const useBatchesStore = create<BatchesState>()(
         set({
           search: '',
           page: 1,
-          limit: CATEGORIES_DEFAULT_LIMIT,
+          limit: BATCHES_DEFAULT_LIMIT,
           sort: 'id:asc',
         }),
     }),

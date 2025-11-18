@@ -5,3 +5,7 @@ export const CATEGORIES = {
 export const PRODUCTS = {
   PRODUCTS_DEFAULT_LIMIT: 12,
 }
+
+export const BATCHES = {
+  BATCHES_DEFAULT_LIMIT: 5,
+}
