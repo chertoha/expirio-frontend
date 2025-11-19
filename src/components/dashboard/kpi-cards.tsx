@@ -10,8 +10,6 @@ export default function KpiCards() {
   const { data: batches } = useFindBatches()
   const { data: expiredBatches } = useFindBatches({ expired: true })
 
-  console.log(expiredBatches)
-
   const kpiData = [
     { title: 'Products', value: products?.totalElements ?? 0 },
     { title: 'Batches', value: batches?.totalElements ?? 0 },

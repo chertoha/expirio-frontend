@@ -5,20 +5,22 @@ import BatchesTable from '@/components/tables/batches.table'
 import BatchesToolbar from '@/components/toolbars/batches.toolbar'
 import PaginationBar from '@/components/ui-kit/pagination-bar'
 import { MainTitle } from '@/components/ui/main-title'
-import { useFindBatches } from '@/hooks/api/batches/use-find-batches'
-import { useBatchesStore } from '@/store/use-batches.store'
+import { useFindStorageBatches } from '@/hooks/api/batches/use-find-storage-batch'
+import { useStorageBatchesStore } from '@/store/use-storage-batch.store'
 
 export const Route = createFileRoute('/admin/batches')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { data: batchesResponse, isPending } = useFindBatches()
-  const { page, limit, setPage } = useBatchesStore()
+  const { data, isPending } = useFindStorageBatches()
+  const { page, limit, setPage } = useStorageBatchesStore()
 
-  const batches = Array.isArray(batchesResponse?.data)
-    ? batchesResponse.data
-    : []
+  // const batches = Array.isArray(batchesResponse?.data)
+  //   ? batchesResponse.data
+  //   : []
+
+  const storageBatches = data?.data || []
 
   return (
     <>
@@ -33,12 +35,12 @@ function RouteComponent() {
       <BatchesToolbar />
 
       <div className="mt-10 flex flex-col h-full justify-between">
-        <BatchesTable batches={batches} isLoading={isPending} />
+        <BatchesTable batches={storageBatches} isLoading={isPending} />
 
         <PaginationBar
           page={page}
           limit={limit}
-          total={batchesResponse?.totalElements}
+          total={data?.totalElements}
           onPageClick={(page: number) => setPage(page)}
         />
       </div>

@@ -9,3 +9,7 @@ export const PRODUCTS = {
 export const BATCHES = {
   BATCHES_DEFAULT_LIMIT: 5,
 }
+
+export const STORAGE_BATCHES = {
+  STORAGE_BATCHES_DEFAULT_LIMIT: 5,
+}

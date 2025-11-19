@@ -1,4 +1,4 @@
-import type { Batch } from '@/types/entities'
+import type { Batch, StoragesBatchListType } from '@/types/entities'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import {
@@ -32,7 +32,7 @@ import TableBase from './base.table'
 import TableBaseBatches from './base.table.batches'
 
 type BatchesTableProps = {
-  batches: Batch[]
+  batches: StoragesBatchListType[]
   isLoading?: boolean
 }
 export default function BatchesTable({
@@ -43,7 +43,7 @@ export default function BatchesTable({
   const { mutateAsync: deleteBatch } = useDeleteBatch()
   const { data: storages = [] } = useListStorages()
 
-  const columns = useMemo<ColumnDef<Batch>[]>(
+  const columns = useMemo<ColumnDef<StoragesBatchListType>[]>(
     () => [
       {
         // accessorKey: 'batchNumber',
@@ -60,20 +60,20 @@ export default function BatchesTable({
           </div>
         ),
         cell: ({ row }) => (
-          <div className="flex flex-col items-start gap-1.5">
+          <div className="flex flex-col items-start gap-1.5 py-4">
             <div className="text-[18px] font-medium">
-              {row.original.product.name}
+              {row.original.batch.product.name}
             </div>
 
             <div className="text-slate-400 font-normal">
-              {row.original.batchNumber}
+              {row.original.batch.batchNumber}
             </div>
             {/* <div className="text-slate-400 font-normal">
               {row.original.description}
             </div> */}
 
             <ul className="flex flex-wrap gap-1">
-              {row.original.product.categories.map(({ category }) => (
+              {row.original.batch.product.categories.map(({ category }) => (
                 <Badge key={category.id}>{category.name}</Badge>
               ))}
             </ul>
@@ -87,7 +87,7 @@ export default function BatchesTable({
         id: 'quantity',
         header: 'Quantity',
         cell: ({ row }) => {
-          const quantity = row.original.storages.reduce(
+          const quantity = row.original.batch.storages.reduce(
             (acc, { qty }) => (acc += qty),
             0,
           )
@@ -135,29 +135,7 @@ export default function BatchesTable({
             <div className="flex items-center gap-2 text-[#64748B]">
               <IconMapPin />
 
-              <TooltipProvider delayDuration={200}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <p className="truncate max-w-40 overflow-hidden text-ellipsis cursor-pointer">
-                      {row.original.storages
-                        .map((s) => s.storage.name)
-                        .join(', ')}
-                    </p>
-                  </TooltipTrigger>
-
-                  <TooltipContent side="top" className="">
-                    <div className="p-1 text-sm">
-                      {row.original.storages.map(({ storage, qty }) => (
-                        <p key={storage.id}>
-                          {storage.name} : {qty}
-                        </p>
-                      ))}
-                    </div>
-                    {/* <p className="max-w-xs wrap-break-word">Test</p> */}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              {/* <div className="truncate w-[120px]">{storageNames}</div> */}
+              {row.original.storage.name}
             </div>
           )
         },
@@ -172,14 +150,14 @@ export default function BatchesTable({
             <div className="flex flex-col gap-y-1">
               <p className="flex items-center gap-x-1 text-slate-400">
                 <IconCalendarMonth className="w-3.5 h-3.5 stroke-slate-600" />
-                {new Date(row.original.manufactureDate).toLocaleDateString(
-                  'en-GB',
-                )}
+                {new Date(
+                  row.original.batch.manufactureDate,
+                ).toLocaleDateString('en-GB')}
               </p>
 
               <p className="flex items-center gap-x-1 text-slate-400">
                 <IconCalendarMonth className="w-3.5 h-3.5 stroke-slate-600" />
-                {new Date(row.original.manufactureDate).toLocaleDateString(
+                {new Date(row.original.batch.expirationDate).toLocaleDateString(
                   'en-GB',
                 )}
               </p>
@@ -191,7 +169,7 @@ export default function BatchesTable({
         accessorKey: 'status',
         header: () => <p className="text-center"> Status</p>,
         cell: ({ row }) => {
-          const { expirationDate } = row.original
+          const { expirationDate } = row.original.batch
 
           const now = new Date()
           const expDate = new Date(expirationDate)
@@ -240,10 +218,11 @@ export default function BatchesTable({
         header: () => <div className="text-right pr-4">Actions</div>,
         cell: ({ row }) => (
           <div className="flex justify-end gap-2">
-            <EditBatchButton batch={row.original} />
+            {/* <EditBatchButton batch={row.original} /> */}
 
             <DeleteIconButton
-              onDelete={() => deleteBatch(row.original.id)}
+              // onDelete={() => deleteBatch(row.original.)}
+              onDelete={() => {}}
               popupTitle="Are you sure you want to delete category"
               popupDescription="This action cannot be undone and will permanently delete category from data base"
             />
