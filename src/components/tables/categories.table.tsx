@@ -11,7 +11,6 @@ import { useCategoriesStore } from '@/store/use-categories.store'
 import EditCategoryButton from '../buttons/edit-category.button'
 import DeleteIconButton from '../ui-kit/delete-icon.button'
 import TableHeaderSortButton from '../ui-kit/table-header-sort.button'
-import { Checkbox } from '../ui/checkbox'
 import TableBase from './base.table'
 
 type CategoriesTableProps = {

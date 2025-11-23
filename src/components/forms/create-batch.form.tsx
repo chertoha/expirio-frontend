@@ -2,7 +2,6 @@ import type { CreateBatchFormValues } from '@/schemas/batch.schema'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { format } from 'date-fns'
 import { ChevronDownIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'

@@ -1,31 +1,19 @@
-import type { Batch, StoragesBatch } from '@/types/entities'
+import type { Batch } from '@/types/entities'
 import type { ColumnDef } from '@tanstack/react-table'
 
-import { IconCalendarMonth, IconMapPin, IconPackage } from '@tabler/icons-react'
+import { IconCalendarMonth, IconPackage } from '@tabler/icons-react'
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useCallback, useMemo } from 'react'
 
 import { useDeleteBatch } from '@/hooks/api/batches/use-delete-batch'
-import { useDeleteStorageBatch } from '@/hooks/api/batches/use-delete-storage-batch'
-import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 import { cn } from '@/lib/utils'
 import { useBatchesStore } from '@/store/use-batches.store'
 
 import { StoragesDropdown } from '../buttons/batch-storages-dropdown.button'
 import EditBatchButton from '../buttons/edit-batch.button'
-import RelocateBatchButton from '../buttons/relocate-batch.button'
-import WriteOffBatchButton from '../buttons/write-off-batch.button'
 import DeleteIconButton from '../ui-kit/delete-icon.button'
 import TableHeaderSortButton from '../ui-kit/table-header-sort.button'
 import { Badge } from '../ui/badge'
-import { Button } from '../ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
 import TableBase from './base.table'
 
 type BatchesTableProps = {

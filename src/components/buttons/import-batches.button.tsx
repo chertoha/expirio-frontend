@@ -1,4 +1,3 @@
-import { PlusIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import ImportBatchesForm from '../forms/import-batches.form'
