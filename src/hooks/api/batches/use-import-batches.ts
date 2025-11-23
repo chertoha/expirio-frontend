@@ -4,22 +4,20 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { api } from '@/lib/api'
 
-export type CreateBatchData = {
-  batchNumber: string
-  productId: number
-  manufactureDate: string
-  expirationDate: string
-  qty: number
-  storageId: number
-  description?: string
+export type ImportBatchesData = {
+  file: File
 }
 
-export function useCreateBatch() {
+export function useImportBatches() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: CreateBatchData): Promise<Batch> => {
-      const response = await api.post('/batches', data)
+    mutationFn: async (data: ImportBatchesData): Promise<Batch[]> => {
+      const response = await api.post('/batches/import-excel', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       return response.data
     },
     onSuccess: () => {

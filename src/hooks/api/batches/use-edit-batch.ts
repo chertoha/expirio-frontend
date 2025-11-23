@@ -1,27 +1,31 @@
-import type { Batch } from '@/types/entities'
+import type { StoragesBatch } from '@/types/entities'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { api } from '@/lib/api'
 
-export type CreateBatchData = {
-  batchNumber: string
+export type EditBatchData = {
   productId: number
+  batchNumber: string
   manufactureDate: string
   expirationDate: string
-  qty: number
-  storageId: number
   description?: string
 }
 
-export function useCreateBatch() {
+export function useEditBatch() {
   const queryClient = useQueryClient()
-
   return useMutation({
-    mutationFn: async (data: CreateBatchData): Promise<Batch> => {
-      const response = await api.post('/batches', data)
+    mutationFn: async ({
+      id,
+      data,
+    }: {
+      id: number
+      data: EditBatchData
+    }): Promise<StoragesBatch> => {
+      const response = await api.patch(`/batches/${id}`, data)
       return response.data
     },
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['batches'] })
     },

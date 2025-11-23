@@ -53,10 +53,10 @@ export default function AddAlertForm({ close }: AddAlertFormProps) {
   const onSubmit: SubmitHandler<AddAlertFormValues> = async (values) => {
     try {
       await addAlert(values)
+      close()
     } catch (error) {
       notifyAxiosError(error)
     }
-    close()
   }
 
   return (

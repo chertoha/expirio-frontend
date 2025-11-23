@@ -1,12 +1,11 @@
-import type { Batch } from '@/types/entities';
+import type { Batch } from '@/types/entities'
 
-import { SquarePenIcon } from 'lucide-react';
-import { useState } from 'react';
+import { SquarePenIcon } from 'lucide-react'
+import { useState } from 'react'
 
-import Drawer from '../layouts/drawer';
-import { Button } from '../ui/button';
-import EditBatchForm from '../forms/edit-batch.form';
-
+import EditBatchForm from '../forms/edit-batch.form'
+import Drawer from '../layouts/drawer'
+import { Button } from '../ui/button'
 
 type EditBatchButtonProps = {
   batch: Batch

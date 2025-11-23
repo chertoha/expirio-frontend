@@ -40,10 +40,10 @@ export default function EditCategoryForm({
   const onSubmit: SubmitHandler<EditCategoryFormValues> = async (values) => {
     try {
       await updateCategory({ id: category.id, data: values })
+      close()
     } catch {
       notify.error('Something went wrong')
     }
-    close()
   }
 
   return (

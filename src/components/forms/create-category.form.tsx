@@ -36,10 +36,10 @@ export default function CreateCategoryForm({ close }: CreateCategoryFormProps) {
   const onSubmit: SubmitHandler<CreateCategoryFormValues> = async (values) => {
     try {
       await createCategory(values)
+      close()
     } catch {
       notify.error('Something went wrong')
     }
-    close()
   }
 
   return (

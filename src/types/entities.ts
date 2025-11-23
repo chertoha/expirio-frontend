@@ -23,6 +23,15 @@ export type Category = {
 //   categories: Category[]
 // }
 
+export type Storage = {
+  id: number
+  name: string
+  description: string | null
+  temperature: string
+
+  batches: Array<{ storageId: number; batchId: number; qty: number }>
+}
+
 export type StoragesBatch = {
   storageId: number
   batchId: number
@@ -30,6 +39,7 @@ export type StoragesBatch = {
 
   storage: Omit<Storage, 'batches'>
 }
+
 export type Batch = {
   id: number
   batchNumber: string
@@ -41,13 +51,21 @@ export type Batch = {
   product: Product
 }
 
-export type CreateBatchBackendDTO = {
-  batchNumber: string
-  description?: string
-  manufactureDate: string
-  expirationDate: string
-  productId: number
+export type StoragesBatchListType = {
+  storageId: number
+  batchId: number
+  qty: number
+  batch: Batch
+  storage: Omit<Storage, 'batches'>
 }
+
+// export type CreateBatchBackendDTO = {
+//   batchNumber: string
+//   description?: string
+//   manufactureDate: string
+//   expirationDate: string
+//   productId: number
+// }
 
 export type User = {
   id: number
@@ -101,14 +119,6 @@ export type Product = {
   forms: ProductForm[]
 
   activeIngredient: ActiveIngredient
-}
-export type Storage = {
-  id: number
-  name: string
-  description: string | null
-  temperature: string
-
-  batches: Array<{ storageId: number; batchId: number; qty: number }>
 }
 
 export type AlertRule = {

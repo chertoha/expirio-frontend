@@ -26,10 +26,10 @@ export default function CreateStorageForm({ close }: { close: () => void }) {
   const onSubmit = async (values: CreateStorageFormValues) => {
     try {
       await createStorage(values)
+      close()
     } catch {
       notify.error('Something went wrong')
     }
-    close()
   }
 
   return (

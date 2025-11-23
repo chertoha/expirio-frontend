@@ -11,6 +11,5 @@ export function useListStorages() {
       const res = await api.get<Storage[]>('/storages')
       return res.data
     },
-    staleTime: 30_000,
   })
 }

@@ -52,10 +52,10 @@ export default function CreateProductForm({ close }: CreateProductFormProps) {
 
     try {
       await createProduct(values)
+      close()
     } catch (error) {
       notifyAxiosError(error)
     }
-    close()
   }
 
   return (

@@ -39,10 +39,10 @@ export default function EditStorageForm({
   const onSubmit = async (values: EditStorageFormValues) => {
     try {
       await updateStorage({ id: storage.id, data: values })
+      close()
     } catch {
       notify.error('Something went wrong')
     }
-    close()
   }
 
   return (
