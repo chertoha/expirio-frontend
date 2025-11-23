@@ -3,7 +3,8 @@ import type { Batch } from '@/types/entities'
 import { useQuery } from '@tanstack/react-query'
 
 import { api } from '@/lib/api'
-import { useCategoriesStore } from '@/store/use-categories.store'
+import { useBatchesStore } from '@/store/use-batches.store'
+import { BatchStatus } from '@/types/common'
 
 type BatchesResponse = {
   data: Batch[]
@@ -12,19 +13,58 @@ type BatchesResponse = {
   totalElements: number
 }
 
-type BatchesQuery = {
-  expired?: boolean
-}
+export function useFindBatches() {
+  const {
+    page,
+    limit,
+    search,
+    sort,
+    status,
+    productId,
+    categoryId,
+    storageId,
+  } = useBatchesStore()
 
-export function useFindBatches({ expired }: BatchesQuery = {}) {
-  const { page, limit, search, sort } = useCategoriesStore()
   return useQuery<BatchesResponse>({
-    queryKey: ['batches', { page, limit, search, sort, expired }],
+    queryKey: [
+      'batches',
+      { page, limit, search, sort, status, productId, categoryId, storageId },
+    ],
     queryFn: async () => {
       const response = await api.get<BatchesResponse>('/batches', {
-        params: { page, limit, search, sort, expired },
+        params: {
+          page,
+          limit,
+          search,
+          sort,
+          ...(status && { status }),
+          ...(productId && { productId }),
+          ...(categoryId && { categoryId }),
+          ...(storageId && { storageId }),
+        },
       })
       return response.data
+    },
+    placeholderData: (previousData) => previousData,
+  })
+}
+
+export function useFindAllBatches() {
+  return useQuery<Batch[]>({
+    queryKey: ['all-batches'],
+    queryFn: async () => {
+      const checkResponse = await api.get<BatchesResponse>('/batches', {
+        params: { expired: true },
+      })
+
+      const response = await api.get<BatchesResponse>('/batches', {
+        params: {
+          page: 1,
+          limit: checkResponse.data.totalElements,
+        },
+      })
+
+      return response.data.data
     },
     placeholderData: (previousData) => previousData,
   })
@@ -40,7 +80,7 @@ export function useFindAllExpiredBatches() {
 
       const response = await api.get<BatchesResponse>('/batches', {
         params: {
-          expired: true,
+          status: BatchStatus.EXPIRED,
           page: 1,
           limit: checkResponse.data.totalElements,
         },

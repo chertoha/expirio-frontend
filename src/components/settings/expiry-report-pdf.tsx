@@ -5,7 +5,6 @@ import { format } from 'date-fns'
 
 const styles = StyleSheet.create({
   page: {
-    // fontFamily: 'Inter',
     padding: 30,
     fontSize: 10,
     backgroundColor: '#f9fafc',
@@ -30,10 +29,8 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   table: {
-    // display: 'table',
     width: '100%',
     flexDirection: 'column',
-    // width: 'auto',
     borderWidth: 1,
     borderColor: '#e5e7eb',
     borderStyle: 'solid',

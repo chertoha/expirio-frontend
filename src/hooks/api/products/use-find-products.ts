@@ -31,3 +31,18 @@ export function useFindProducts() {
     placeholderData: (previousData) => previousData,
   })
 }
+
+export function useFindAllProducts() {
+  return useQuery({
+    queryKey: ['products-all'],
+    queryFn: async () => {
+      const baseResponse = await api.get<ProductsResponse>('/products')
+
+      const response = await api.get<ProductsResponse>('/products', {
+        params: { page: 1, limit: baseResponse.data.totalElements },
+      })
+
+      return response.data.data
+    },
+  })
+}

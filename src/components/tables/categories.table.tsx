@@ -11,7 +11,6 @@ import { useCategoriesStore } from '@/store/use-categories.store'
 import EditCategoryButton from '../buttons/edit-category.button'
 import DeleteIconButton from '../ui-kit/delete-icon.button'
 import TableHeaderSortButton from '../ui-kit/table-header-sort.button'
-import { Checkbox } from '../ui/checkbox'
 import TableBase from './base.table'
 
 type CategoriesTableProps = {
@@ -39,29 +38,6 @@ export default function CategoriesTable({
 
   const columns = useMemo<ColumnDef<Category>[]>(
     () => [
-      {
-        id: 'select',
-        header: ({ table }) => (
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && 'indeterminate')
-            }
-            onCheckedChange={(value) =>
-              table.toggleAllPageRowsSelected(!!value)
-            }
-            aria-label="Select all"
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-          />
-        ),
-        size: 40,
-      },
       {
         accessorKey: 'name',
         header: () => (

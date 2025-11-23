@@ -1,11 +1,10 @@
-import { PlusIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import CreateBatchForm from '../forms/create-batch.form'
+import ImportBatchesForm from '../forms/import-batches.form'
 import Drawer from '../layouts/drawer'
 import { Button } from '../ui/button'
 
-export default function CreateBatchButton() {
+export default function ImportBatchesButton() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
 
@@ -13,19 +12,19 @@ export default function CreateBatchButton() {
     <>
       <Button
         onClick={() => setOpen(true)}
-        className="hover:text-white w-full "
+        variant="outline"
+        className="text-slate-400 font-normal"
       >
-        <PlusIcon />
-        Add Batch
+        Import Batches
       </Button>
 
       <Drawer
         open={open}
         close={close}
-        title="Add new Batch"
-        description="Enter the details for the new batch."
+        title="Import batches"
+        description="Chose xlsx file to import"
       >
-        <CreateBatchForm close={close} />
+        <ImportBatchesForm close={close} />
       </Drawer>
     </>
   )

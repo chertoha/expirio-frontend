@@ -60,10 +60,10 @@ export default function EditProductForm({
 
     try {
       await updateProduct({ id: product.id, data: values })
+      close()
     } catch (error) {
       notifyAxiosError(error)
     }
-    close()
   }
 
   return (
