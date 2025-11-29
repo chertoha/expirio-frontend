@@ -53,7 +53,6 @@ export default function ProductsTable({
             }
             onCheckedChange={(value) => {
               table.toggleAllPageRowsSelected(!!value)
-              // handleSelectProducts()
             }}
             aria-label="Select all"
           />
@@ -83,7 +82,6 @@ export default function ProductsTable({
           <div className="inline-flex items-center gap-2">
             <span className="font-medium flex items-center gap-x-3">
               {row.original.name}
-              {/* {row.original.} */}
               <Badge variant="secondary">
                 {row.original.dosage} {row.original.dosageUnit.name}
               </Badge>

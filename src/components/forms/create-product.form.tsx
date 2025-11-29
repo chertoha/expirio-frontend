@@ -48,8 +48,6 @@ export default function CreateProductForm({ close }: CreateProductFormProps) {
   })
 
   const onSubmit: SubmitHandler<CreateProductFormValues> = async (values) => {
-    console.log(values)
-
     try {
       await createProduct(values)
       close()

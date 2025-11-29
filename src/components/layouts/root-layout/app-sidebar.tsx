@@ -8,10 +8,9 @@ import {
   IconHeartPlus,
   IconLogout,
   IconMapPin,
-  IconPackage,
+  IconPackages,
   IconPill,
 } from '@tabler/icons-react'
-// import { TabletIcon } from 'lucide-react'
 import * as React from 'react'
 
 import {
@@ -42,7 +41,7 @@ const navMain: NavMain[] = [
   {
     title: 'Batches',
     url: '/admin/batches',
-    icon: IconPackage,
+    icon: IconPackages,
   },
   {
     title: 'Storages',

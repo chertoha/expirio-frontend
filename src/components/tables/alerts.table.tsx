@@ -21,8 +21,6 @@ export default function AlertsTable() {
 
   const handleEnabled = useCallback(
     async (id: number, isEnabled: boolean) => {
-      console.log(isEnabled)
-
       await setEnabledAlert({ id, data: { isEnabled: !isEnabled } })
     },
     [setEnabledAlert],

@@ -60,7 +60,6 @@ export default function CreateBatchForm({ close }: CreateBatchFormProps) {
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <FieldGroup>
-        {/* Batch number */}
         <Field>
           <FieldLabel htmlFor="batchNumber">Batch number *</FieldLabel>
           <Input
@@ -127,7 +126,6 @@ export default function CreateBatchForm({ close }: CreateBatchFormProps) {
                       selected={field.value || undefined}
                       captionLayout="dropdown"
                       onSelect={(date) => {
-                        // setDate(date)
                         field.onChange(date)
                         setOpenManCalendar(false)
                       }}
@@ -174,7 +172,6 @@ export default function CreateBatchForm({ close }: CreateBatchFormProps) {
                       selected={field.value || undefined}
                       captionLayout="dropdown"
                       onSelect={(date) => {
-                        // setDate(date)
                         field.onChange(date)
                         setOpenExpCalendar(false)
                       }}

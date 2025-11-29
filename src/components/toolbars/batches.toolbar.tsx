@@ -120,7 +120,6 @@ export default function BatchesToolbar({
           isNumber
         />
 
-        {/* <CreateBatchButton /> */}
         <BatchesSettingsDropDownButton />
       </div>
     </div>

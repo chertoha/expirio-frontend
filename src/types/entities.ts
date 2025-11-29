@@ -6,23 +6,6 @@ export type Category = {
   products: Array<{ categoryId: number; productId: number }>
 }
 
-// export type Storage = {
-//   id: number
-//   name: string
-//   description: string | null
-//   temperature: number
-// }
-
-// export type Product = {
-//   id: number
-//   name: string
-//   barcode: string
-//   dosage: number
-//   dosageUnitId: number
-//   activeIngredientId: number
-//   categories: Category[]
-// }
-
 export type Storage = {
   id: number
   name: string
@@ -58,14 +41,6 @@ export type StoragesBatchListType = {
   batch: Batch
   storage: Omit<Storage, 'batches'>
 }
-
-// export type CreateBatchBackendDTO = {
-//   batchNumber: string
-//   description?: string
-//   manufactureDate: string
-//   expirationDate: string
-//   productId: number
-// }
 
 export type User = {
   id: number

@@ -65,7 +65,6 @@ export default function CreateBatchForm({ close, batch }: EditBatchFormProps) {
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <FieldGroup>
-        {/* Batch number */}
         <Field>
           <FieldLabel htmlFor="batchNumber">Batch number *</FieldLabel>
           <Input
@@ -132,7 +131,6 @@ export default function CreateBatchForm({ close, batch }: EditBatchFormProps) {
                       selected={field.value || undefined}
                       captionLayout="dropdown"
                       onSelect={(date) => {
-                        // setDate(date)
                         field.onChange(date)
                         setOpenManCalendar(false)
                       }}
@@ -179,7 +177,6 @@ export default function CreateBatchForm({ close, batch }: EditBatchFormProps) {
                       selected={field.value || undefined}
                       captionLayout="dropdown"
                       onSelect={(date) => {
-                        // setDate(date)
                         field.onChange(date)
                         setOpenExpCalendar(false)
                       }}
@@ -191,40 +188,6 @@ export default function CreateBatchForm({ close, batch }: EditBatchFormProps) {
             <InputErrorMessage text={errors.expirationDate?.message} />
           </Field>
         </div>
-
-        {/* <div className="flex gap-x-6">
-          <Field>
-            <FieldLabel htmlFor="create_batch_form_qty">Quantity</FieldLabel>
-            <Input
-              id="create_batch_form_qty"
-              {...register('qty', { valueAsNumber: true })}
-              placeholder="Quantity"
-            />
-            <InputErrorMessage text={errors.qty?.message} />
-          </Field>
-
-          <Field>
-            <FieldLabel htmlFor="create_batch_form_storage">Storage</FieldLabel>
-            <Controller
-              control={control}
-              name="storageId"
-              render={({ field }) => (
-                <SearchSelect
-                  className="w-[200px]"
-                  value={field.value}
-                  onChange={(value) => field.onChange(value)}
-                  options={storages.map(({ id, name }) => ({
-                    label: name,
-                    value: id,
-                  }))}
-                  placeholder="Select storage..."
-                  isNumber
-                />
-              )}
-            />
-            <InputErrorMessage text={errors.storageId?.message} />
-          </Field>
-        </div> */}
 
         <Field>
           <FieldLabel htmlFor="create_batch_form_description">

@@ -160,7 +160,6 @@ export default function BatchesTable({
             <StoragesDropdown storages={row.original.storages} />
           </div>
         ),
-        // size: 200,
       },
 
       {

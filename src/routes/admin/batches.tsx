@@ -12,10 +12,7 @@ export const Route = createFileRoute('/admin/batches')({
 })
 
 function RouteComponent() {
-  // const { data, isPending } = useFindStorageBatches()
   const { data, isPending } = useFindBatches()
-
-  // const { page, limit, setPage } = useBatchesStore()
 
   const { page, limit, setPage, search, setSearch } = useBatchesStore(
     useShallow((s) => ({

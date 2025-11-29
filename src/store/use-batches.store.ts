@@ -42,11 +42,11 @@ export const useBatchesStore = create<BatchesState>()(
       setSearch: (search) => set({ search, page: 1 }),
       setPage: (page) => set({ page }),
       setLimit: (limit) => set({ limit }),
-      setSort: (sort) => set({ sort }),
-      setStatus: (status) => set({ status }),
-      setProduct: (productId) => set({ productId }),
-      setCategory: (categoryId) => set({ categoryId }),
-      setStorage: (storageId) => set({ storageId }),
+      setSort: (sort) => set({ sort, page: 1 }),
+      setStatus: (status) => set({ status, page: 1 }),
+      setProduct: (productId) => set({ productId, page: 1 }),
+      setCategory: (categoryId) => set({ categoryId, page: 1 }),
+      setStorage: (storageId) => set({ storageId, page: 1 }),
 
       reset: () =>
         set({
