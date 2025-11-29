@@ -50,8 +50,6 @@ export default function AssignCategoryButton() {
         title="Assign category to products"
         description="Choose category for assignment."
       >
-        {/* <CreateCategoryForm close={close} /> */}
-
         <>
           <SearchSelect
             className="w-full"

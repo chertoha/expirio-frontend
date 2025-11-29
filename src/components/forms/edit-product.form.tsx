@@ -56,8 +56,6 @@ export default function EditProductForm({
   })
 
   const onSubmit: SubmitHandler<EditProductFormValues> = async (values) => {
-    console.log(values)
-
     try {
       await updateProduct({ id: product.id, data: values })
       close()

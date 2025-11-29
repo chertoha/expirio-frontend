@@ -31,7 +31,6 @@ function RouteComponent() {
         <h1 className="text-slate-900 text-3xl font-extrabold leading-8">
           Categories
         </h1>
-        {/* <CreateCategoryButton /> */}
       </div>
 
       <p className="mt-2 text-base leading-7 text-slate-500">

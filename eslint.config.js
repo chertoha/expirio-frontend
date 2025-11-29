@@ -1,8 +1,6 @@
 //  @ts-check
 
 import { tanstackConfig } from '@tanstack/eslint-config'
-// import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin'
-// import typescriptEslintParser from '@typescript-eslint/parser'
 import reactHooks from 'eslint-plugin-react-hooks'
 
 export default [
@@ -12,12 +10,7 @@ export default [
   },
 
   {
-    // languageOptions: {
-    //   parser: typescriptEslintParser,
-    // },
-
     plugins: {
-      // '@typescript-eslint': typescriptEslintPlugin,
       'react-hooks': reactHooks,
     },
 

@@ -32,8 +32,6 @@ export default function ImportBatchesForm({ close }: ImportBatchesFormProps) {
     resolver: zodResolver(importBatchesSchema),
   })
 
-  console.log(errors)
-
   const onSubmit: SubmitHandler<ImportBatchesFormValues> = async (values) => {
     if (!values.file) return
     try {

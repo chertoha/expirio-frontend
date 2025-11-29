@@ -17,22 +17,44 @@ export default function CategoriesPieChart() {
       <CardContent className="p-4">
         <h2 className="mb-4 text-3xl font-medium">Categories</h2>
 
-        <ResponsiveContainer width="100%" height={280}>
-          <PieChart>
-            <Pie
-              data={categoryData}
-              dataKey="value"
-              nameKey="name"
-              outerRadius={100}
-              label
-            >
-              {categoryData.map((entry, i) => (
-                <Cell key={i} fill={getPastelColorFromString(entry.name)} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
+        <div className="flex">
+          <ResponsiveContainer width="60%" height={280}>
+            <PieChart>
+              <Pie
+                data={categoryData}
+                dataKey="value"
+                nameKey="name"
+                outerRadius={100}
+                label
+              >
+                {categoryData.map((entry, i) => (
+                  <Cell key={i} fill={getPastelColorFromString(entry.name)} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+
+          <div
+            className="grow custom-scroll w-1/3 overflow-y-auto pr-3"
+            style={{ maxHeight: '280px' }}
+          >
+            {categoryData.map((cat) => (
+              <div key={cat.name} className="flex items-center gap-2 py-1">
+                <div
+                  className="h-3 w-3 rounded-sm"
+                  style={{
+                    backgroundColor: getPastelColorFromString(cat.name),
+                  }}
+                />
+
+                <span className="text-gray-800 text-sm">{cat.name}</span>
+
+                <span className="ml-auto text-sm font-medium">{cat.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </CardContent>
     </Card>
   )

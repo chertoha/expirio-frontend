@@ -13,8 +13,6 @@ import { useUpdateStorage } from '@/hooks/api/storages/use-update-storage'
 import { notify } from '@/lib/notify'
 import { storageSchema } from '@/schemas/storage'
 
-// import { storageSchema } from '@/utils/forms/storage'
-
 export default function EditStorageForm({
   storage,
   close,

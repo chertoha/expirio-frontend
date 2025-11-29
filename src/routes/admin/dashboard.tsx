@@ -20,29 +20,6 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1">
         <StorageBarChart />
       </div>
-
-      {/* Area Chart */}
-      {/* <Card className="rounded-2xl shadow-sm">
-        <CardContent className="p-4">
-          <h2 className="mb-4 text-lg font-medium">
-            Expiring Batches by Month
-          </h2>
-          <ResponsiveContainer width="100%" height={280}>
-            <AreaChart data={expiringData}>
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Area
-                type="monotone"
-                dataKey="count"
-                stroke="#10B981"
-                fill="#D1FAE5"
-                strokeWidth={2}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card> */}
     </div>
   )
 }
