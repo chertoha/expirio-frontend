@@ -15,7 +15,11 @@ export function useGetCategoryList() {
       const response = await api.get<CategoriesResponse>('/categories')
 
       const allDataResponse = await api.get<CategoriesResponse>('/categories', {
-        params: { page: 1, limit: response.data.totalElements },
+        params: {
+          page: 1,
+          limit: response.data.totalElements,
+          sort: 'name:asc',
+        },
       })
 
       return allDataResponse.data.data

@@ -9,18 +9,22 @@ export const Route = createFileRoute('/admin/settings')({
 
 function SettingsPage() {
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-            Settings
-          </h1>
-        </div>
+    <>
+      <div className="flex items-center justify-between">
+        <h1 className="text-slate-900 text-3xl font-extrabold leading-8">
+          Settings
+        </h1>
       </div>
 
-      <AlertCard />
+      <p className="mt-2 text-base leading-7 text-slate-500">
+        This page allows users to configure automatic expiration alerts and
+        generate expiry reports for medications.
+      </p>
 
-      <GenerateReportCard />
-    </div>
+      <div className="mt-10 flex flex-col h-full gap-y-6">
+        <AlertCard />
+        <GenerateReportCard />
+      </div>
+    </>
   )
 }

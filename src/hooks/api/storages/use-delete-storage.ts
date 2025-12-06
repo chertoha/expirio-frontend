@@ -1,6 +1,7 @@
 import type { Storage } from '@/types/entities'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import axios from 'axios'
 
 import { api } from '@/lib/api'
 
@@ -15,6 +16,17 @@ export function useDeleteStorage() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['storages'] })
+    },
+
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status
+
+        if (status === 409) {
+          throw new Error('Storage is not empty — cannot be deleted')
+        }
+      }
+      throw error
     },
   })
 }

@@ -10,7 +10,7 @@ export type Storage = {
   id: number
   name: string
   description: string | null
-  temperature: string
+  temperature: number
 
   batches: Array<{ storageId: number; batchId: number; qty: number }>
 }

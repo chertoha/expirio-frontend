@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { notifyAxiosError } from '@/helpers/notify-axios-error'
 import { useCreateStorage } from '@/hooks/api/storages/use-create-storage'
-import { notify } from '@/lib/notify'
 import { storageSchema } from '@/schemas/storage'
 
 export default function CreateStorageForm({ close }: { close: () => void }) {
@@ -19,7 +19,7 @@ export default function CreateStorageForm({ close }: { close: () => void }) {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateStorageFormValues>({
-    defaultValues: { name: '', description: '', temperature: '' },
+    defaultValues: { name: '', description: '', temperature: 22 },
     resolver: zodResolver(storageSchema),
   })
 
@@ -27,8 +27,8 @@ export default function CreateStorageForm({ close }: { close: () => void }) {
     try {
       await createStorage(values)
       close()
-    } catch {
-      notify.error('Something went wrong')
+    } catch (error) {
+      notifyAxiosError(error)
     }
   }
 
@@ -54,7 +54,11 @@ export default function CreateStorageForm({ close }: { close: () => void }) {
           <FieldLabel htmlFor="create_storage_temp">
             Temperature Label
           </FieldLabel>
-          <Input id="create_storage_temp" {...register('temperature')} />
+          <Input
+            id="create_storage_temp"
+            type="number"
+            {...register('temperature', { valueAsNumber: true })}
+          />
           <InputErrorMessage text={errors.temperature?.message} />
         </Field>
         <Field>

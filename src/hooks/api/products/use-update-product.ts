@@ -18,7 +18,7 @@ export function useUpdateProduct() {
       id: number
       data: UpdateProductData
     }): Promise<Product> => {
-      const response = await api.patch(`/products/${id}`, data)
+      const response = await api.put(`/products/${id}`, data)
       return response.data
     },
 

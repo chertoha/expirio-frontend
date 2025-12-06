@@ -10,7 +10,8 @@ export const storageSchema = z.object({
     .max(200, 'Description must be at most 200 characters long')
     .optional()
     .or(z.literal('')),
-  temperature: z.string().min(1, 'Temperature label is required'),
+
+  temperature: z.number({ error: 'Temperature must be a number' }).int(),
 })
 
 export type CreateStorageFormValues = z.infer<typeof storageSchema>

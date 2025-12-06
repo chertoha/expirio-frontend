@@ -1,6 +1,7 @@
 import type { Category } from '@/types/entities'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import axios from 'axios'
 
 import { api } from '@/lib/api'
 
@@ -15,6 +16,19 @@ export function useDeleteCategory() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] })
+    },
+
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status
+
+        if (status === 409) {
+          console.log('CAT TEST')
+
+          throw new Error('Category is might be assigned to some products')
+        }
+      }
+      throw error
     },
   })
 }

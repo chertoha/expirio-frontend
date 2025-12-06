@@ -63,7 +63,10 @@ export default function EditStorageForm({
         </Field>
         <Field>
           <FieldLabel htmlFor="edit_storage_temp">Temperature Label</FieldLabel>
-          <Input id="edit_storage_temp" {...register('temperature')} />
+          <Input
+            id="edit_storage_temp"
+            {...register('temperature', { valueAsNumber: true })}
+          />
           <InputErrorMessage text={errors.temperature?.message} />
         </Field>
         <Field>

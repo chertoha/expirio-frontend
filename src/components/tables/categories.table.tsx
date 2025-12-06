@@ -4,8 +4,8 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useCallback, useMemo } from 'react'
 
+import { notifyAxiosError } from '@/helpers/notify-axios-error'
 import { useDeleteCategory } from '@/hooks/api/categories/use-delete-category'
-import { notify } from '@/lib/notify'
 import { useCategoriesStore } from '@/store/use-categories.store'
 
 import EditCategoryButton from '../buttons/edit-category.button'
@@ -29,8 +29,8 @@ export default function CategoriesTable({
     async (id: number) => {
       try {
         await deleteCategory(id)
-      } catch {
-        notify.error('Something went wrong')
+      } catch (error) {
+        notifyAxiosError(error)
       }
     },
     [deleteCategory],

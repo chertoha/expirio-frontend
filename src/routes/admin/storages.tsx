@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import CreateStorageButton from '@/components/buttons/create-storage.button'
 import StorageCard from '@/components/storage/storage-card'
+import { notifyAxiosError } from '@/helpers/notify-axios-error'
 import { useDeleteStorage } from '@/hooks/api/storages/use-delete-storage'
 import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 import { notify } from '@/lib/notify'
@@ -19,8 +20,8 @@ function RouteComponent() {
     try {
       await del.mutateAsync(id)
       notify.success('Storage deleted successfully')
-    } catch {
-      notify.error('Error deleting storage')
+    } catch (error) {
+      notifyAxiosError(error)
     }
   }
   if (isLoading) {
