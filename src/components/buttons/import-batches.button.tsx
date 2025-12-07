@@ -13,7 +13,7 @@ export default function ImportBatchesButton() {
       <Button
         onClick={() => setOpen(true)}
         variant="outline"
-        className="text-slate-400 font-normal"
+        className="text-slate-400 font-normal w-full"
       >
         Import Batches
       </Button>

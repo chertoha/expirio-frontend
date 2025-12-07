@@ -18,8 +18,8 @@ export default function CategoriesToolbar({
   onSearchChange,
 }: CategoriesToolbarProps) {
   return (
-    <div className="flex items-center justify-between">
-      <div className="w-[300px]">
+    <div className="flex max-xs:flex-col justify-between gap-4">
+      <div className="max-w-[300px]">
         <InputGroup>
           <InputGroupInput
             placeholder="Search..."
@@ -31,6 +31,7 @@ export default function CategoriesToolbar({
           </InputGroupAddon>
         </InputGroup>
       </div>
+
       <CreateCategoryButton />
     </div>
   )

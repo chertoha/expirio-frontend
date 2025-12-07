@@ -17,7 +17,7 @@ export default function PaginationBar({
   const to = Math.min(page * limit, total)
 
   return (
-    <div className="mt-6 flex items-center justify-between">
+    <div className="mt-6 flex max-xs:flex-col-reverse gap-4 items-center justify-between">
       <p className="shrink-0 flex gap-x-1 text-sm leading-[1.285] font-medium">
         <span className="text-slate-400">Items</span>
         {from}-{to}

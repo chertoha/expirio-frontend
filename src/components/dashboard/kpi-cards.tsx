@@ -48,11 +48,11 @@ export default function KpiCards() {
   ]
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid max-sm:grid-cols-1 grid-cols-2 gap-4">
       {kpiData.map(({ title, value, icon: Icon, color, bg }) => (
         <Card key={title} className="rounded-2xl shadow-sm">
           <CardContent className="p-6">
-            <div className="flex items-center gap-10">
+            <div className="flex max-xs:flex-col items-center gap-10">
               <div className={`p-4 rounded-xl ${bg}`}>
                 <Icon className={`w-8 h-8 ${color}`} />
               </div>

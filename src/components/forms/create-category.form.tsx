@@ -58,7 +58,7 @@ export default function CreateCategoryForm({ close }: CreateCategoryFormProps) {
         </Field>
 
         <Field>
-          <div className="flex gap-x-4 justify-end">
+          <div className="flex max-xs:flex-col gap-4 justify-end">
             <Button variant="outline" onClick={close}>
               Cancel
             </Button>

@@ -1,11 +1,13 @@
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 
 import { useGetCategoryList } from '@/hooks/api/categories/use-get-category-list'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 import { Card, CardContent } from '../ui/card'
 
 export default function CategoriesPieChart() {
   const { categoryList = [] } = useGetCategoryList()
+  const isMobile = useIsMobile()
 
   const categoryData = categoryList.map((c) => ({
     name: c.name,
@@ -17,8 +19,8 @@ export default function CategoriesPieChart() {
       <CardContent className="p-4">
         <h2 className="mb-4 text-3xl font-medium">Categories</h2>
 
-        <div className="flex">
-          <ResponsiveContainer width="60%" height={280}>
+        <div className="flex max-sm:flex-col max-sm:items-center">
+          <ResponsiveContainer width={isMobile ? '100%' : '60%'} height={280}>
             <PieChart>
               <Pie
                 data={categoryData}
@@ -36,7 +38,7 @@ export default function CategoriesPieChart() {
           </ResponsiveContainer>
 
           <div
-            className="grow custom-scroll w-1/3 overflow-y-auto pr-3"
+            className="custom-scroll grow max-md:max-w-[500px] sm:w-1/3 overflow-y-auto pr-3"
             style={{ maxHeight: '280px' }}
           >
             {categoryData.map((cat) => (
