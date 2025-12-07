@@ -11,7 +11,7 @@ export const Route = createFileRoute('/admin/dashboard')({
 export default function DashboardPage() {
   return (
     <div className="flex flex-col flex-1 gap-6 p-6">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 xl:grid-cols-2  gap-4">
         <CategoriesPieChart />
 
         <KpiCards />

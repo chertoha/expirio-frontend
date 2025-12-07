@@ -21,7 +21,7 @@ export default function StorageCard({
 }) {
   return (
     <Card className="rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
-      <CardHeader className="flex items-start justify-between pb-2">
+      <CardHeader className="flex max-xs:flex-col gap-4 items-start justify-between pb-2">
         <div className="flex items-center gap-2">
           <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-100 text-sky-700">
             <MapPin size={16} />

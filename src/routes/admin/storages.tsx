@@ -32,7 +32,7 @@ function RouteComponent() {
   }
   return (
     <>
-      <div className="flex items-start justify-between">
+      <div className="flex max-xs:flex-col gap-6 items-start justify-between">
         <div>
           <h1 className="text-slate-900 text-3xl font-extrabold leading-8">
             Storage Locations
