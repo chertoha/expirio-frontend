@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+import { Search, SlidersHorizontal } from 'lucide-react'
 
 import {
   InputGroup,
@@ -12,6 +12,13 @@ import { useProductsStore } from '@/store/use-products.store'
 import AssignCategoryButton from '../buttons/assign-category.button'
 import CreateProductButton from '../buttons/create-product.button'
 import SearchSelect from '../ui-kit/search-select'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '../ui/sheet'
 
 type ProductsToolbarProps = {
   search: string
@@ -28,8 +35,8 @@ export default function ProductsToolbar({
     useProductsStore()
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="w-[300px]">
+    <div className="flex max-xs:flex-col justify-between gap-4">
+      <div className="w-full max-w-[300px]">
         <InputGroup>
           <InputGroupInput
             placeholder="Search..."
@@ -42,7 +49,7 @@ export default function ProductsToolbar({
         </InputGroup>
       </div>
 
-      <div className="flex items-center gap-x-4 ">
+      <div className="hidden xl:flex items-center gap-x-4 ">
         <SearchSelect
           className="w-[200px]"
           value={categoryId}
@@ -68,8 +75,53 @@ export default function ProductsToolbar({
         />
 
         <CreateProductButton />
-
         <AssignCategoryButton />
+      </div>
+
+      <div className="xl:hidden ">
+        <Sheet>
+          <SheetTrigger asChild>
+            <button className="flex items-center gap-2 rounded-md border px-3 py-2 text-sm w-full max-w-[300px]">
+              <SlidersHorizontal size={18} />
+              Filters
+            </button>
+          </SheetTrigger>
+
+          <SheetContent side="bottom" className="p-4">
+            <SheetHeader>
+              <SheetTitle>Filters & Actions</SheetTitle>
+            </SheetHeader>
+
+            <div className="grid max-sm:grid-cols-1 grid-cols-2 gap-4">
+              <SearchSelect
+                className="w-full"
+                value={categoryId}
+                onChange={(value) => setCategory(Number(value))}
+                options={categoryList.map(({ id, name }) => ({
+                  label: name,
+                  value: id,
+                }))}
+                placeholder="Category..."
+              />
+
+              <SearchSelect
+                className="w-full"
+                value={activeIngredientId}
+                onChange={(value) => setIngredient(Number(value))}
+                options={ingredients.map(({ id, name }) => ({
+                  label: name,
+                  value: id,
+                }))}
+                placeholder="Active ingredient..."
+              />
+            </div>
+
+            <div className="flex max-xs:flex-col justify-end gap-4 mt-4">
+              <CreateProductButton />
+              <AssignCategoryButton />
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </div>
   )
