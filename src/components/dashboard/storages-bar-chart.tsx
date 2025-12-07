@@ -1,11 +1,4 @@
-import {
-  Bar,
-  BarChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts'
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { useListStorages } from '@/hooks/api/storages/use-list-storages'
 
@@ -27,7 +20,6 @@ export default function StorageBarChart() {
       <CardContent className="p-4">
         <h2 className="mb-4 text-lg font-medium">Stock Volume by Storages</h2>
 
-        {/* <ResponsiveContainer width="100%" height={330}> */}
         <div className="overflow-x-auto">
           <div style={{ width: chartWidth }}>
             <BarChart
@@ -50,7 +42,6 @@ export default function StorageBarChart() {
             </BarChart>
           </div>
         </div>
-        {/* </ResponsiveContainer> */}
       </CardContent>
     </Card>
   )
