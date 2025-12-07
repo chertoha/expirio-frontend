@@ -24,7 +24,7 @@ export default function Drawer({
 }: DrawerProps) {
   return (
     <Sheet open={open} onOpenChange={close}>
-      <SheetContent className="min-w-[600px] p-6">
+      <SheetContent className="md:min-w-[600px] p-6">
         <SheetHeader className="px-0 pt-0">
           <SheetTitle className="text-2xl leading-8">{title}</SheetTitle>
           <SheetDescription>{description}</SheetDescription>

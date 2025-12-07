@@ -62,7 +62,7 @@ export default function CreateStorageForm({ close }: { close: () => void }) {
           <InputErrorMessage text={errors.temperature?.message} />
         </Field>
         <Field>
-          <div className="flex justify-end gap-3">
+          <div className="flex max-xs:flex-col justify-end gap-4">
             <Button variant="outline" type="button" onClick={close}>
               Cancel
             </Button>

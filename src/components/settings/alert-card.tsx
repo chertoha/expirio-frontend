@@ -12,7 +12,7 @@ import AlertsTable from '../tables/alerts.table'
 export default function AlertCard() {
   return (
     <Card>
-      <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-0">
+      <CardHeader className="flex max-xs:flex-col gap-4 flex-row items-start justify-between space-y-0 pb-0">
         <div>
           <CardTitle className="text-2xl font-medium">
             Expiration alerts

@@ -61,7 +61,7 @@ export default function RelocateBatchForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FieldGroup>
-        <div className="flex gap-x-6">
+        <div className="flex max-sm:flex-col gap-6">
           <Field>
             <FieldLabel htmlFor="relocate_batch_form_qty">
               Quantity to relocate
@@ -103,7 +103,7 @@ export default function RelocateBatchForm({
         </div>
 
         <Field>
-          <div className="flex gap-x-4 justify-end">
+          <div className="flex max-xs:flex-col gap-4 justify-end">
             <Button variant="outline" onClick={close}>
               Cancel
             </Button>
